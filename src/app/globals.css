@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-cream: #F9F8F6;
+    --text-dark: #0a0a0a;
+    --font-serif: "Cormorant Garamond", Georgia, serif;
+    --font-display: "Montserrat", sans-serif;
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html {
+    scroll-behavior: auto; /* Lenis handles smooth scroll */
+    background-color: #050505;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Typography Families */
+.font-serif {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.font-display {
+  font-family: "Montserrat", sans-serif;
+}
+
+.font-sans {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Smooth Hide Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* --- Advanced Cinematic Animations --- */
+
+/* 1. Global Loader Curtain */
+.global-curtain-container {
+  will-change: transform, opacity;
+}
+
+/* 2. Curtain Image Reveal */
+.curtain-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.curtain-reveal {
+  position: absolute;
+  inset: -1px; /* Prevent bleeding edges */
+  background: #F9F8F6;
+  z-index: 10;
+  transform-origin: bottom;
+  transform: scaleY(1);
+  transition: transform 1.6s cubic-bezier(0.86, 0, 0.07, 1);
+  pointer-events: none;
+}
+
+.dark-section .curtain-reveal {
+  background: #050505;
+}
+
+.curtain-wrapper.active .curtain-reveal {
+  transform: scaleY(0);
+}
+
+/* 3. Parallax Image Scaling (scale-out) */
+.scale-out {
+  transform: scale(1.2);
+  transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.curtain-wrapper.active .scale-out,
+.curtain-wrapper.active img.scale-out {
+  transform: scale(1);
+}
+
+/* 4. Split Text Staggered Reveal */
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.split-char {
+  display: inline-block;
+  transform: translateY(105%);
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  will-change: transform, opacity;
+}
+
+.split-text.active .split-char {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* 5. Standard Fades */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.fade-up.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay helpers */
+.delay-100 { transition-delay: 0.1s !important; }
+.delay-200 { transition-delay: 0.2s !important; }
+.delay-300 { transition-delay: 0.3s !important; }
+.delay-500 { transition-delay: 0.5s !important; }
+.delay-700 { transition-delay: 0.7s !important; }
+.delay-1000 { transition-delay: 1.0s !important; }
+
+/* 6. Line Expand */
+.line-expand {
+  width: 0%;
+  transform-origin: left;
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: width;
+}
+
+.line-expand.active {
+  width: 100%;
+}
+
+.line-expand-vertical {
+  height: 0%;
+  transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.line-expand-vertical.active {
+  height: 100%;
+}
+
+/* 7. Marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* 8. Parallax Element */
+.js-parallax {
+  will-change: transform;
+}
