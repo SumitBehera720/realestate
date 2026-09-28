@@ -29,6 +29,12 @@ const SERVICES = [
     desc: "Thorough due-diligence, encumbrance certificate (EC) clearance, sale deed drafting, and sub-registrar registration support to keep every transaction legally airtight.",
     icon: "solar:document-text-linear",
   },
+  {
+    num: "05",
+    title: "New Launches (Launching Soon)",
+    desc: "Get exclusive pre-launch access to premium projects across Bangalore before they hit the open market. Secure early-bird pricing and priority unit selection.",
+    icon: "solar:rocket-linear",
+  },
 ];
 
 export const ExpertiseSection: React.FC = () => {

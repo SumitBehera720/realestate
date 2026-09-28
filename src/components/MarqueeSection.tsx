@@ -2,15 +2,15 @@
 import React from "react";
 
 const LOCATIONS = [
-  "Worli",
-  "Bandra",
-  "Malabar Hill",
-  "Juhu",
-  "South Mumbai",
   "Whitefield",
   "Indiranagar",
   "Sadashivnagar",
   "Koramangala",
+  "Devanahalli",
+  "Hebbal",
+  "Malleswaram",
+  "Jayanagar",
+  "HSR Layout",
 ];
 
 export const MarqueeSection: React.FC = () => {

@@ -79,6 +79,20 @@ export const SERVICES = [
       "Sub-registrar registration support & follow-up",
       "Full KYC compliance & RERA documentation assistance"
     ]
+  },
+  {
+    id: "new-launches",
+    title: "New Launches (Launching Soon)",
+    subtitle: "Exclusive early access to Bangalore's finest projects",
+    description:
+      "Get exclusive pre-launch access to premium projects across Bangalore before they hit the open market. Secure early-bird pricing, priority unit selection, and VIP investment advantages.",
+    image: "/images/brigade-oasis.webp",
+    features: [
+      "Exclusive pre-launch & soft-launch invitations",
+      "Priority unit selection & early-bird pricing",
+      "VIP site tours & developer presentations",
+      "Pre-registration assistance & EOI submission"
+    ]
   }
 ];
 

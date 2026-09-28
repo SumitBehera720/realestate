@@ -336,6 +336,7 @@ export default function ServicesPage() {
                     <option>Loan Advice</option>
                     <option>Interior Service</option>
                     <option>Documentation Service</option>
+                    <option>New Launches (Launching Soon)</option>
                     <option>SBR One Residence Site Visit</option>
                   </select>
                 </div>

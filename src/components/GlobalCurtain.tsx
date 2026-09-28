@@ -8,22 +8,41 @@ interface GlobalCurtainProps {
 }
 
 export const GlobalCurtain: React.FC<GlobalCurtainProps> = ({ onRevealed }) => {
-  // Step 0: Centered title "SK REALTECH" side-by-side (0ms - 900ms)
-  // Step 1: Gap opens cleanly between SK and REALTECH; framed estate image emerges in the gap (900ms - 2200ms)
-  // Step 2: Center image expands smoothly; words & borders fade away; curtain dissolves into live hero (2200ms - 3400ms)
+  // Step -1: Initial mount for smooth entrance animation
+  // Step 0: Centered title "SK REALTECH" side-by-side
+  // Step 1: Gap opens cleanly between SK and REALTECH; framed estate image emerges in the gap
+  // Step 2: Center image expands smoothly; words & borders fade away; curtain dissolves into live hero
   // Step 3: Completely unmounted
-  const [step, setStep] = useState<0 | 1 | 2 | 3>(0);
+  const [step, setStep] = useState<-1 | 0 | 1 | 2 | 3>(() => {
+    if (typeof window !== "undefined" && (window as any).__SK_CURTAIN_SHOWN__) {
+      return 3;
+    }
+    return -1;
+  });
 
   const onRevealedRef = useRef(onRevealed);
   onRevealedRef.current = onRevealed;
 
   useEffect(() => {
+    if (step === 3) {
+      if (onRevealedRef.current) onRevealedRef.current();
+      return;
+    }
+
     let isCancelled = false;
+    if (typeof window !== "undefined") {
+      (window as any).__SK_CURTAIN_SHOWN__ = true;
+    }
+
+    // 0. Smooth entrance animation trigger
+    const timer0 = setTimeout(() => {
+      if (!isCancelled) setStep(0);
+    }, 100);
 
     // 1. Open gap in between SK and REALTECH; emerge center estate image
     const timer1 = setTimeout(() => {
       if (!isCancelled) setStep(1);
-    }, 900);
+    }, 1400);
 
     // 2. Expand center image & dissolve curtain into live website
     const timer2 = setTimeout(() => {
@@ -33,15 +52,16 @@ export const GlobalCurtain: React.FC<GlobalCurtainProps> = ({ onRevealed }) => {
           onRevealedRef.current();
         }
       }
-    }, 2300);
+    }, 2800);
 
     // 3. Unmount completely from DOM
     const timer3 = setTimeout(() => {
       if (!isCancelled) setStep(3);
-    }, 3600);
+    }, 4300);
 
     return () => {
       isCancelled = true;
+      clearTimeout(timer0);
       clearTimeout(timer1);
       clearTimeout(timer2);
       clearTimeout(timer3);
@@ -63,7 +83,7 @@ export const GlobalCurtain: React.FC<GlobalCurtainProps> = ({ onRevealed }) => {
     <div
       id="global-curtain"
       onClick={handleSkip}
-      className={`fixed inset-0 z-[99999] text-white flex flex-col justify-between p-6 sm:p-12 md:p-14 select-none cursor-pointer overflow-hidden transition-opacity duration-1000 ease-out ${
+      className={`fixed inset-0 z-[99999] text-white flex flex-col justify-between p-6 sm:p-12 md:p-14 select-none cursor-pointer overflow-hidden transition-opacity duration-[1500ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
         step === 2 ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
       style={{ background: "#0c0b09" }}
@@ -86,18 +106,20 @@ export const GlobalCurtain: React.FC<GlobalCurtainProps> = ({ onRevealed }) => {
       />
       {/* Top Header: Luxury Emblem & Brand Name */}
       <div
-        className={`relative z-30 flex flex-col items-center justify-center transition-all duration-700 ${
-          step >= 2 ? "opacity-0 -translate-y-4" : "opacity-100 translate-y-0"
+        className={`relative z-30 flex flex-col items-center justify-center transition-all duration-[1200ms] ease-out ${
+          step === -1 ? "opacity-0 translate-y-8" : step >= 2 ? "opacity-0 -translate-y-4" : "opacity-100 translate-y-0"
         }`}
       >
-        <div className="flex flex-col items-center space-y-1">
-          <img
-            src="/images/logo.png"
-            alt="SK Realtech"
-            className="h-16 sm:h-20 w-auto object-contain brightness-0 invert opacity-90"
-          />
-          <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.35em] text-amber-400/80 font-semibold mt-1">
-            SK REALTECH
+        <div className="flex flex-col items-center space-y-3">
+          <div className="bg-white/95 p-3 sm:p-4 rounded-xl shadow-2xl">
+            <img
+              src="/images/logo.png"
+              alt="SK Realtech"
+              className="h-12 sm:h-16 w-auto object-contain"
+            />
+          </div>
+          <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.35em] text-amber-400/80 font-semibold">
+            EXPLORE THE SCIENCE OF REAL ESTATE
           </span>
         </div>
       </div>
@@ -122,8 +144,9 @@ export const GlobalCurtain: React.FC<GlobalCurtainProps> = ({ onRevealed }) => {
         <div
           className="flex items-center select-none flex-shrink-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.76,0,0.24,1)]"
           style={{
-            transform: step >= 2 ? "translateX(-30vw)" : "translateX(0)",
-            opacity: step >= 2 ? 0 : 1,
+            transform: step === -1 ? "translateX(-30vw)" : step >= 2 ? "translateX(-30vw)" : "translateX(0)",
+            opacity: step === -1 ? 0 : step >= 2 ? 0 : 1,
+            transitionDuration: step === -1 || step === 0 ? "1200ms" : "1000ms",
           }}
         >
           <span className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-sans font-bold tracking-tight uppercase text-white leading-none whitespace-nowrap">
@@ -143,28 +166,28 @@ export const GlobalCurtain: React.FC<GlobalCurtainProps> = ({ onRevealed }) => {
           className="flex items-center justify-center flex-shrink-0 overflow-hidden transition-all duration-[1100ms] ease-[cubic-bezier(0.76,0,0.24,1)]"
           style={{
             width:
-              step === 0
+              step <= 0
                 ? "0.75rem"
                 : step === 1
                 ? "clamp(240px, 32vw, 440px)"
                 : "100vw",
             height:
-              step === 0
+              step <= 0
                 ? "0px"
                 : step === 1
                 ? "clamp(150px, 20vw, 275px)"
                 : "100vh",
             marginLeft:
-              step === 0 ? "0.35rem" : "clamp(1rem, 2vw, 2.5rem)",
+              step <= 0 ? "0.35rem" : "clamp(1rem, 2vw, 2.5rem)",
             marginRight:
-              step === 0 ? "0.35rem" : "clamp(1rem, 2vw, 2.5rem)",
+              step <= 0 ? "0.35rem" : "clamp(1rem, 2vw, 2.5rem)",
             transform:
               step >= 2
                 ? "scale(3.2)"
                 : step === 1
                 ? "scale(1)"
                 : "scale(0.8)",
-            opacity: step === 0 ? 0 : 1,
+            opacity: step <= 0 ? 0 : 1,
             zIndex: step >= 2 ? 50 : 20,
           }}
         >
@@ -201,8 +224,9 @@ export const GlobalCurtain: React.FC<GlobalCurtainProps> = ({ onRevealed }) => {
         <div
           className="flex items-center select-none flex-shrink-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.76,0,0.24,1)]"
           style={{
-            transform: step >= 2 ? "translateX(30vw)" : "translateX(0)",
-            opacity: step >= 2 ? 0 : 1,
+            transform: step === -1 ? "translateX(30vw)" : step >= 2 ? "translateX(30vw)" : "translateX(0)",
+            opacity: step === -1 ? 0 : step >= 2 ? 0 : 1,
+            transitionDuration: step === -1 || step === 0 ? "1200ms" : "1000ms",
           }}
         >
           <span
@@ -220,8 +244,8 @@ export const GlobalCurtain: React.FC<GlobalCurtainProps> = ({ onRevealed }) => {
 
       {/* Bottom Footer: Tagline & Origin details */}
       <div
-        className={`relative z-30 flex items-center justify-between text-[11px] font-sans uppercase tracking-[0.25em] text-white/30 transition-all duration-700 ${
-          step >= 2 ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+        className={`relative z-30 flex items-center justify-between text-[11px] font-sans uppercase tracking-[0.25em] text-white/30 transition-all duration-[1200ms] ease-out delay-200 ${
+          step === -1 ? "opacity-0 translate-y-8" : step >= 2 ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
         }`}
       >
         <span className="hidden sm:inline">BENGALURU • KARNATAKA</span>
