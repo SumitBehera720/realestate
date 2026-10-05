@@ -86,22 +86,40 @@ export const GlobalCurtain: React.FC<GlobalCurtainProps> = ({ onRevealed }) => {
       className={`fixed inset-0 z-[99999] text-white flex flex-col justify-between p-6 sm:p-12 md:p-14 select-none cursor-pointer overflow-hidden transition-opacity duration-[1500ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
         step === 2 ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
-      style={{ background: "#0c0b09" }}
+      style={{ background: "radial-gradient(circle at center, #1f1a14 0%, #0a0908 100%)" }}
     >
-      {/* Grain texture */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-[0.06]"
+      {/* Moving Architectural Grid Background */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "128px 128px",
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          backgroundPosition: 'center center',
+          maskImage: 'radial-gradient(circle at center, black 40%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 80%)'
         }}
       />
-      {/* Warm radial glow centered behind the gap */}
+
+      {/* Dynamic Animated Gradient Glows */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-amber-500/10 blur-[140px] animate-pulse" style={{ animationDuration: '6s' }} />
+        <div className="absolute bottom-[-30%] right-[-10%] w-[80vw] h-[80vw] rounded-full bg-amber-700/15 blur-[160px] animate-pulse" style={{ animationDuration: '8s', animationDelay: '1s' }} />
+        <div className="absolute top-[20%] left-[40%] w-[40vw] h-[40vw] rounded-full bg-orange-600/5 blur-[100px] animate-pulse" style={{ animationDuration: '5s', animationDelay: '2s' }} />
+      </div>
+
+      {/* Grain texture */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none opacity-[0.1] mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+        }}
+      />
+      {/* Warm radial vignette centered behind the gap */}
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 55% 40% at 50% 50%, rgba(180,120,40,0.12) 0%, transparent 75%)",
+          background: "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, rgba(0,0,0,0.6) 100%)",
         }}
       />
       {/* Top Header: Luxury Emblem & Brand Name */}

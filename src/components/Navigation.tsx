@@ -44,7 +44,7 @@ export const Navigation: React.FC = () => {
             href="/"
             className="flex items-center space-x-3 group transition-transform duration-300 hover:scale-[1.02]"
           >
-            <div className="relative flex items-center justify-center p-1 bg-white/5 rounded border border-white/10 group-hover:border-amber-400/40 transition-colors">
+            <div className="relative flex items-center justify-center p-1.5 bg-white rounded-md shadow-sm border border-white/20 group-hover:border-amber-400/40 transition-colors">
               <img
                 src="/images/logo.png"
                 alt="SK Realtech Logo"
@@ -55,8 +55,8 @@ export const Navigation: React.FC = () => {
               <span className="text-lg md:text-xl font-serif tracking-wide uppercase text-white font-medium group-hover:text-amber-300 transition-colors leading-tight">
                 SK REALTECH
               </span>
-              <span className="text-[9px] font-sans tracking-[0.25em] text-zinc-400 uppercase font-normal">
-                Bengaluru Estates
+              <span className="text-[9px] font-sans tracking-[0.15em] text-zinc-400 uppercase font-normal">
+                Exploring the science of real estate
               </span>
             </div>
           </Link>
@@ -126,11 +126,13 @@ export const Navigation: React.FC = () => {
             onClick={() => setMenuOpen(false)}
             className="flex items-center space-x-3"
           >
-            <img
-              src="/images/logo.png"
-              alt="SK Realtech"
-              className="h-10 w-auto object-contain"
-            />
+            <div className="bg-white p-1 rounded-md">
+              <img
+                src="/images/logo.png"
+                alt="SK Realtech"
+                className="h-10 w-auto object-contain"
+              />
+            </div>
             <span className="font-serif font-medium tracking-wide text-2xl uppercase text-white">
               SK REALTECH
             </span>

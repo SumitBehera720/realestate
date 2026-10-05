@@ -21,8 +21,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           className="w-full h-full object-cover object-center sm:object-right-top opacity-90 scale-out js-parallax"
           data-speed="0.15"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/45 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-amber-900/30 via-transparent to-zinc-900/40 mix-blend-overlay" />
       </div>
 
       {/* Hero Content */}

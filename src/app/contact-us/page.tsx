@@ -8,9 +8,15 @@ import { PROPERTIES } from "@/data/properties";
 
 export default function ContactUsPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", property: "General Inquiry" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    const { createEnquiry } = await import("@/app/actions/enquiryActions");
+    await createEnquiry(formData);
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -147,6 +153,8 @@ export default function ContactUsPage() {
                       <input
                         type="text"
                         required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Anand Menon"
                         className="w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white placeholder-zinc-500 rounded focus:outline-none focus:border-amber-400 transition-colors"
                       />
@@ -156,6 +164,8 @@ export default function ContactUsPage() {
                       <input
                         type="tel"
                         required
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="98765 43210"
                         className="w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white placeholder-zinc-500 rounded focus:outline-none focus:border-amber-400 transition-colors"
                       />
@@ -168,13 +178,19 @@ export default function ContactUsPage() {
                       <input
                         type="email"
                         required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="name@company.com"
                         className="w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white placeholder-zinc-500 rounded focus:outline-none focus:border-amber-400 transition-colors"
                       />
                     </div>
                     <div>
                       <label className="text-xs font-sans text-zinc-300 block mb-1.5 font-medium">Property of Interest</label>
-                      <select className="w-full bg-zinc-800 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400">
+                      <select 
+                        value={formData.property}
+                        onChange={(e) => setFormData({ ...formData, property: e.target.value })}
+                        className="w-full bg-zinc-800 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400"
+                      >
                         {PROPERTIES.map((p) => (
                           <option key={p.id} value={p.title}>
                             {p.title} ({p.location.split(",")[0]})
@@ -182,7 +198,7 @@ export default function ContactUsPage() {
                         ))}
                         <option value="Commercial">Commercial Properties</option>
                         <option value="Resale">Resale &amp; Liquidations</option>
-                        <option value="General">General Inquiry</option>
+                        <option value="General Inquiry">General Inquiry</option>
                       </select>
                     </div>
                   </div>
@@ -216,9 +232,10 @@ export default function ContactUsPage() {
 
                   <button
                     type="submit"
-                    className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-sans font-bold text-xs uppercase tracking-widest rounded transition-all shadow-xl hover:shadow-amber-500/25 cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-sans font-bold text-xs uppercase tracking-widest rounded transition-all shadow-xl hover:shadow-amber-500/25 cursor-pointer disabled:opacity-50"
                   >
-                    Submit Enquiry
+                    {isSubmitting ? "Submitting..." : "Submit Enquiry"}
                   </button>
                 </form>
               )}
@@ -234,11 +251,11 @@ export default function ContactUsPage() {
             <div className="relative w-full h-[400px] rounded-xl overflow-hidden bg-zinc-800">
               <iframe
                 title="SK Realtech Location"
-                src="https://maps.google.com/maps?q=Safal%20Market,%20Bidare%20Agrahara,%20Bengaluru,%20Karnataka%20560049&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=F441%2C%20Vijaysri%20Eldorado%2C%20Sy%20No%2025%2C%201%20and%2025%2C%202%20Bidere%2C%20behind%20Safal%20Market%2C%20Agarahara%2C%20Bidare%20Agraha%2C%20Bengaluru%2C%20Karnataka%20560049&t=&z=14&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
-                style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
-                allowFullScreen={false}
+                style={{ border: 0 }}
+                allowFullScreen={true}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

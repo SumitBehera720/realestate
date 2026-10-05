@@ -27,6 +27,59 @@ export interface Property {
 
 export const PROPERTIES: Property[] = [
   {
+    id: "global-queens-ville",
+    slug: "global-queens-ville",
+    title: "SBR Global Queens Ville",
+    subtitle: "Ultra-Premium 2 & 3 BHK Luxury Villas and Villaments",
+    propertyType: "Luxury Villa & Gated Community",
+    status: "For Sale · Ongoing",
+    price: "₹1.7 Cr Onwards*",
+    priceNumeric: "1.70 Cr",
+    location: "Kumbalgodu, Mysore Road, Bengaluru",
+    fullAddress: "Near Kumbalgodu Metro Station, Off Mysore Road Expressway, Bengaluru, Karnataka 560074",
+    bedrooms: "2 & 3 BHK",
+    bathrooms: "3 Baths",
+    area: "1,720 - 2,650 Sq.Ft",
+    totalUnits: "280 Units",
+    developmentSize: "8.5 Acres",
+    noOfBlocks: "Gated Enclave",
+    completionDate: "2027",
+    reraNo: "PRM/KA/RERA/1251/310/PR/220822/005180",
+    heroImage: "/images/global-queens-ville.webp",
+    gallery: [
+      "/images/global-queens-ville.webp",
+      "/images/noble-apartments.webp",
+      "/images/hero-luxury-banner.jpg",
+      "/images/about-interior.jpg"
+    ],
+    overview: [
+      "SBR Global Queens Ville is an exclusive enclave of serene luxury villas and villaments situated along the burgeoning Mysore Road corridor near Kumbalgodu, Bangalore.",
+      "Designed for those who crave privacy and nature without disconnecting from the city, each villa boasts dedicated private gardens, double-height living spaces, and bespoke architecture.",
+      "With seamless connectivity via the Bengaluru-Mysore 10-lane Expressway and Namma Metro Purple Line, Global Queens Ville offers effortless access to central Bangalore and tech parks."
+    ],
+    highlights: [
+      "Low-density community offering privacy and open air living",
+      "Private backyards and terrace sky decks with every villa",
+      "Adjacent to Kumbalgodu Metro Station & NICE Road junction",
+      "Comprehensive club lifestyle with indoor sports and swimming pool",
+      "Sustainable design with rainwater harvesting & solar street lighting"
+    ],
+    amenities: [
+      { name: "Exclusive Resident Clubhouse", icon: "solar:buildings-2-linear" },
+      { name: "Heated Swimming Pool", icon: "solar:water-sun-linear" },
+      { name: "Badminton & Table Tennis", icon: "solar:cup-first-linear" },
+      { name: "Landscaped Central Park", icon: "solar:leaf-linear" },
+      { name: "Round-the-Clock CCTV & Manned Security", icon: "solar:shield-check-linear" },
+      { name: "Senior Citizen Reflexology Park", icon: "solar:heart-angle-linear" }
+    ],
+    specifications: [
+      { label: "Structure", value: "Reinforced cement concrete with solid block masonry walls" },
+      { label: "Flooring", value: "Premium imported marble finish vitrified tiles & anti-skid terrace tiles" },
+      { label: "Balconies", value: "Toughened glass railings with stainless steel balustrades" },
+      { label: "Power Backup", value: "100% DG backup for each villa and all common amenities" }
+    ]
+  },
+  {
     id: "sbr-one-residence",
     slug: "sbr-one-residence",
     title: "SBR One Residence",
@@ -88,59 +141,6 @@ export const PROPERTIES: Property[] = [
       { label: "Kitchen", value: "Granite platform with double bowl stainless steel sink & piped gas provision" },
       { label: "Electrical", value: "Concealed copper wiring with Schneider/Legrand modular switches & 100% DG power backup" },
       { label: "Plumbing & Sanitary", value: "Grohe / Kohler premium CP fittings and wall-hung sanitary ware" }
-    ]
-  },
-  {
-    id: "global-queens-ville",
-    slug: "global-queens-ville",
-    title: "SBR Global Queens Ville",
-    subtitle: "Ultra-Premium 2 & 3 BHK Luxury Villas and Villaments",
-    propertyType: "Luxury Villa & Gated Community",
-    status: "For Sale · Ongoing",
-    price: "₹1.7 Cr Onwards*",
-    priceNumeric: "1.70 Cr",
-    location: "Kumbalgodu, Mysore Road, Bengaluru",
-    fullAddress: "Near Kumbalgodu Metro Station, Off Mysore Road Expressway, Bengaluru, Karnataka 560074",
-    bedrooms: "2 & 3 BHK",
-    bathrooms: "3 Baths",
-    area: "1,720 - 2,650 Sq.Ft",
-    totalUnits: "280 Units",
-    developmentSize: "8.5 Acres",
-    noOfBlocks: "Gated Enclave",
-    completionDate: "2027",
-    reraNo: "PRM/KA/RERA/1251/310/PR/220822/005180",
-    heroImage: "/images/global-queens-ville.webp",
-    gallery: [
-      "/images/global-queens-ville.webp",
-      "/images/noble-apartments.webp",
-      "/images/hero-luxury-banner.jpg",
-      "/images/about-interior.jpg"
-    ],
-    overview: [
-      "SBR Global Queens Ville is an exclusive enclave of serene luxury villas and villaments situated along the burgeoning Mysore Road corridor near Kumbalgodu, Bangalore.",
-      "Designed for those who crave privacy and nature without disconnecting from the city, each villa boasts dedicated private gardens, double-height living spaces, and bespoke architecture.",
-      "With seamless connectivity via the Bengaluru-Mysore 10-lane Expressway and Namma Metro Purple Line, Global Queens Ville offers effortless access to central Bangalore and tech parks."
-    ],
-    highlights: [
-      "Low-density community offering privacy and open air living",
-      "Private backyards and terrace sky decks with every villa",
-      "Adjacent to Kumbalgodu Metro Station & NICE Road junction",
-      "Comprehensive club lifestyle with indoor sports and swimming pool",
-      "Sustainable design with rainwater harvesting & solar street lighting"
-    ],
-    amenities: [
-      { name: "Exclusive Resident Clubhouse", icon: "solar:buildings-2-linear" },
-      { name: "Heated Swimming Pool", icon: "solar:water-sun-linear" },
-      { name: "Badminton & Table Tennis", icon: "solar:cup-first-linear" },
-      { name: "Landscaped Central Park", icon: "solar:leaf-linear" },
-      { name: "Round-the-Clock CCTV & Manned Security", icon: "solar:shield-check-linear" },
-      { name: "Senior Citizen Reflexology Park", icon: "solar:heart-angle-linear" }
-    ],
-    specifications: [
-      { label: "Structure", value: "Reinforced cement concrete with solid block masonry walls" },
-      { label: "Flooring", value: "Premium imported marble finish vitrified tiles & anti-skid terrace tiles" },
-      { label: "Balconies", value: "Toughened glass railings with stainless steel balustrades" },
-      { label: "Power Backup", value: "100% DG backup for each villa and all common amenities" }
     ]
   },
   {
@@ -244,6 +244,6 @@ export const PROPERTIES: Property[] = [
 ];
 
 export const getPropertyBySlug = (slug: string): Property | undefined => {
-  const normalized = slug.toLowerCase().replace(/_/g, "-");
+  const normalized = (slug || "").toString().toLowerCase().replace(/_/g, "-");
   return PROPERTIES.find(p => p.slug === normalized || p.id === normalized || (normalized === "sbr-one-residence" && p.id === "sbr-one-residence"));
 };

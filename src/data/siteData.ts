@@ -4,19 +4,19 @@ export const CONTACT_INFO = {
   phone: "+91-6360270209",
   phoneDisplay: "+91 63602 70209",
   email: "sales@skrealtech.com",
-  address: "Sy No 25, 1 and 25, 2 Bidere, behind Safal Market, Agarahara, Bidare Agraha, Bengaluru, Karnataka 560049",
+  address: "F441, Vijaysri Eldorado, Sy No 25, 1 and 25, 2 Bidere, behind Safal Market, Agarahara, Bidare Agraha, Bengaluru, Karnataka 560049",
   shortAddress: "Behind Safal Market, Bidare Agraha, Bengaluru 560049",
-  hours: "Monday – Saturday: 9:30 AM – 6:30 PM (Sunday: By Appointment)",
+  hours: "Monday – Sunday: 24/7 (Always Open)",
   since: "2011",
   stats: [
     { value: "15+", label: "Years Experience" },
     { value: "1.5K+", label: "Happy Customers" },
-    { value: "500+", label: "Properties Listed" },
-    { value: "99%", label: "Client Satisfaction" }
+    { value: "500+", label: "Properties Handed Over" },
+    { value: "300+", label: "NRIs Served" }
   ],
   socials: [
-    { name: "Instagram", url: "https://instagram.com" },
-    { name: "Facebook", url: "https://facebook.com" },
+    { name: "Instagram", url: "https://www.instagram.com/skrealtech_official/" },
+    { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61594394113189" },
     { name: "Twitter", url: "https://twitter.com" },
     { name: "YouTube", url: "https://youtube.com" },
     { name: "LinkedIn", url: "https://linkedin.com" }
@@ -30,7 +30,7 @@ export const SERVICES = [
     subtitle: "End-to-end advisory for buyers and sellers across Bengaluru",
     description:
       "Whether you are buying your dream home or selling a premium asset, our team handles every step — curated shortlisting, site visits, legal vetting, negotiation, documentation, and seamless handover. Maximum valuation, minimum friction.",
-    image: "/images/selling-properties.avif",
+    image: "/images/buying_selling_service.jpg",
     features: [
       "Exclusive high-net-worth buyer & verified seller database",
       "Cinematic architectural photography & virtual 3D tours",
@@ -72,7 +72,7 @@ export const SERVICES = [
     subtitle: "Legally airtight transactions from start to finish",
     description:
       "We handle thorough due-diligence, encumbrance certificate (EC) clearance, sale deed drafting, and sub-registrar registration support — keeping every transaction fully compliant and legally secure.",
-    image: "/images/resale-properties.webp",
+    image: "/images/documentation_service.jpg",
     features: [
       "Encumbrance certificate (EC) & tax clearance checks",
       "Sale deed drafting & stamp duty calculation",

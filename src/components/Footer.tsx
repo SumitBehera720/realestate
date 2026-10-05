@@ -43,7 +43,7 @@ export const Footer: React.FC = () => {
         {/* Column 1: Brand & Slogan */}
         <div className="lg:col-span-4 space-y-6">
           <Link href="/" className="inline-flex items-center space-x-3 group">
-            <div className="p-1.5 bg-white/5 rounded border border-white/15">
+            <div className="p-1.5 bg-white rounded-md shadow-sm border border-white/20">
               <img
                 src="/images/logo.png"
                 alt="SK Realtech Logo"
@@ -51,11 +51,11 @@ export const Footer: React.FC = () => {
               />
             </div>
             <div>
-              <span className="text-2xl font-serif text-white font-medium tracking-tight block">
+              <span className="text-2xl font-serif text-white font-medium tracking-tight block leading-tight">
                 SK REALTECH
               </span>
-              <span className="text-xs text-amber-400 font-sans tracking-wider uppercase font-medium">
-                Premier Real Estate
+              <span className="text-[10px] font-sans tracking-[0.1em] text-zinc-400 uppercase font-normal">
+                Exploring the science of real estate
               </span>
             </div>
           </Link>
@@ -202,6 +202,20 @@ export const Footer: React.FC = () => {
               Terms of Use
             </Link>
           </div>
+        </div>
+        <div className="max-w-[1920px] mx-auto flex justify-center md:justify-end gap-6 mt-6">
+          {CONTACT_INFO.socials.map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-amber-400 transition-colors"
+              aria-label={social.name}
+            >
+              <Icon icon={`mdi:${social.name.toLowerCase()}`} width={20} height={20} />
+            </a>
+          ))}
         </div>
       </div>
     </footer>

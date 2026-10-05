@@ -13,6 +13,8 @@ import { ExpertiseSection } from "@/components/ExpertiseSection";
 import { EditorialSection } from "@/components/EditorialSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
+import { EnquiryPopup } from "@/components/EnquiryPopup";
+import { SocialMediaGallery } from "@/components/SocialMediaGallery";
 
 export default function Home() {
   const [curtainLifted, setCurtainLifted] = useState(false);
@@ -98,6 +100,8 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen selection:bg-zinc-900 selection:text-white">
+      <EnquiryPopup />
+
       {/* 1. Global Preloader Curtain */}
       <GlobalCurtain onRevealed={handleCurtainRevealed} />
 
@@ -125,10 +129,13 @@ export default function Home() {
       {/* 9. Editorial Journal Section */}
       <EditorialSection />
 
-      {/* 10. Private Access Contact Desk */}
+      {/* 10. Social Media Gallery */}
+      <SocialMediaGallery />
+
+      {/* 11. Private Access Contact Desk */}
       <ContactSection />
 
-      {/* 11. Minimalist Luxury Footer */}
+      {/* 12. Minimalist Luxury Footer */}
       <Footer />
     </main>
   );

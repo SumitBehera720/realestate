@@ -50,6 +50,72 @@ export default function AboutUsPage() {
         </div>
       </section>
 
+      {/* Founder Section */}
+      <section className="py-20 lg:py-28 px-6 lg:px-16 max-w-[1920px] mx-auto border-t border-white/10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="order-2 lg:order-1 relative rounded-2xl overflow-hidden h-[650px] group shadow-2xl border border-white/10">
+            <img src="/images/founder-award-1.jpeg" alt="Founder of SK Realtech" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            <div className="absolute bottom-8 left-8 right-8">
+              <h3 className="text-2xl font-serif text-white">Basant Singh</h3>
+              <span className="text-xs font-sans uppercase tracking-widest text-amber-400 font-semibold">Managing Director & Founder</span>
+            </div>
+          </div>
+          <div className="order-1 lg:order-2 space-y-8">
+            <div>
+              <span className="text-xs font-sans uppercase tracking-[0.25em] text-amber-400 font-semibold mb-2 block">
+                Meet the Founder
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-serif font-light text-white leading-tight">
+                Visionary leadership shaping Bengaluru's skyline.
+              </h2>
+            </div>
+            <div className="space-y-4 text-base font-sans text-zinc-300 font-light leading-relaxed">
+              <p>
+                With over a decade of hands-on experience in the real estate sector, our founder has built SK Realtech on the principles of absolute transparency, unwavering integrity, and customer-first service.
+              </p>
+              <p>
+                His dedication to simplifying the complexities of property investment has guided thousands of families to their dream homes and helped investors secure high-yield assets across the city's fastest-growing corridors.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Rewards & Recognition Section */}
+      <section className="py-20 lg:py-28 px-6 lg:px-16 max-w-[1920px] mx-auto border-t border-white/10 bg-zinc-900/30">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <div>
+              <span className="text-xs font-sans uppercase tracking-[0.25em] text-amber-400 font-semibold mb-2 block">
+                Industry Rewards
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-serif font-light text-white leading-tight">
+                Recognized for excellence and trust.
+              </h2>
+            </div>
+            <div className="space-y-4 text-base font-sans text-zinc-300 font-light leading-relaxed">
+              <p>
+                Our commitment to delivering exceptional real estate advisory services hasn't gone unnoticed. We have been honored at several prestigious industry summits and awards ceremonies.
+              </p>
+              <p>
+                These accolades serve as a testament to our ongoing pursuit of excellence, reinforcing our promise to offer you only the best, RERA-approved, and thoroughly vetted properties in the market.
+              </p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-4 h-[400px]">
+            <div className="relative rounded-2xl overflow-hidden h-full group border border-white/10">
+              <img src="/images/founder-award-2.jpeg" alt="Industry Event Recognition" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div className="relative rounded-2xl overflow-hidden h-full group border border-white/10">
+              <img src="/images/founder-award-3.jpeg" alt="Founder Speaking at Summit" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* 2. Key Metrics Bar */}
       <section className="bg-zinc-900 border-b border-white/10 py-12 px-6 lg:px-16">
         <div className="max-w-[1920px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -150,7 +216,7 @@ export default function AboutUsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "Suresh Kumar",
+                name: "Basant Singh",
                 role: "Managing Director & Founder",
                 desc: "Over 18 years shaping luxury and residential land development across East & North Bengaluru corridors.",
                 image: "/images/client-meeting.jpg",
@@ -176,7 +242,7 @@ export default function AboutUsPage() {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
                 <div className="p-6 space-y-2">
@@ -189,6 +255,37 @@ export default function AboutUsPage() {
                   </p>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram Gallery Section */}
+      <section className="bg-zinc-950 py-20 lg:py-28 border-t border-white/10 overflow-hidden">
+        <div className="max-w-[1920px] mx-auto px-6 lg:px-16 mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <div>
+            <span className="text-xs font-sans uppercase tracking-[0.25em] text-amber-400 font-semibold mb-2 block">
+              Social Updates
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-serif font-light text-white">
+              Instagram Gallery
+            </h2>
+          </div>
+          <a href="https://www.instagram.com/skrealtech_official/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-zinc-300 hover:text-amber-400 transition-colors font-sans text-sm">
+            <Icon icon="mdi:instagram" width={24} height={24} />
+            <span>@skrealtech_official</span>
+          </a>
+        </div>
+        
+        <div className="max-w-[1920px] mx-auto px-6 lg:px-16">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {['founder-award-1.jpeg', 'founder-award-2.jpeg', 'founder-award-3.jpeg', 'founder-award-4.jpeg', 'founder-award-5.jpeg', 'founder-award-6.jpg'].map((img, idx) => (
+              <a key={idx} href="https://www.instagram.com/skrealtech_official/" target="_blank" rel="noopener noreferrer" className="relative aspect-square rounded-xl overflow-hidden group block border border-white/10">
+                <img src={`/images/${img}`} alt={`Instagram Post ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-80 transition-all duration-500" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
+                  <Icon icon="mdi:instagram" width={32} height={32} className="text-white" />
+                </div>
+              </a>
             ))}
           </div>
         </div>

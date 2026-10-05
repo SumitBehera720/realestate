@@ -1,16 +1,17 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 
 const LOCATIONS = [
   "Whitefield",
-  "Indiranagar",
-  "Sadashivnagar",
-  "Koramangala",
+  "Hoskote",
+  "Sarjapura",
+  "Marthahalli",
+  "Mysore Road",
+  "Electronic City",
   "Devanahalli",
-  "Hebbal",
-  "Malleswaram",
-  "Jayanagar",
-  "HSR Layout",
+  "Gunjur",
+  "Varthur",
 ];
 
 export const MarqueeSection: React.FC = () => {
@@ -22,7 +23,9 @@ export const MarqueeSection: React.FC = () => {
             key={idx}
             className="flex items-center space-x-8 md:space-x-12 px-4 text-xs font-display uppercase tracking-[0.45em] font-light text-white/50"
           >
-            <span>{loc}</span>
+            <Link href={`/properties?location=${encodeURIComponent(loc)}`} className="hover:text-amber-400 transition-colors cursor-pointer">
+              {loc}
+            </Link>
             <span className="w-1 h-1 rounded-full bg-white/25 inline-block" />
           </div>
         ))}
