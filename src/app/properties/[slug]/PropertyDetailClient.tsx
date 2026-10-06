@@ -328,7 +328,7 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
                 type="submit"
                 className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-sans font-bold text-xs uppercase tracking-[0.2em] rounded transition-all shadow-xl hover:shadow-amber-500/20"
               >
-                Request Detailed Dossier &amp; Price Sheet
+                Request Detailed Brochure &amp; Price Sheet
               </button>
             </form>
 
@@ -470,7 +470,7 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
             </h3>
             <p className="text-xs font-sans text-zinc-400 mb-6">
               {modalType === "brochure"
-                ? "Enter your contact details to instantly receive the comprehensive PDF dossier & floor plans."
+                ? "Enter your contact details to instantly receive the comprehensive PDF brochure & floor plans."
                 : "Select your preferred date. Our team provides doorstep chauffeur service in Bengaluru."}
             </p>
 

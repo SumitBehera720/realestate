@@ -57,7 +57,7 @@ export const HeritageVillaSection: React.FC = () => {
               onClick={(e) => openInquiry("SBR One Residence", e)}
               className="inline-flex items-center gap-2 px-6 py-4 border border-white/20 hover:border-white text-white font-sans text-xs uppercase tracking-widest backdrop-blur-sm transition-colors rounded"
             >
-              Request Dossier &amp; Price Sheet
+              Request Brochure &amp; Price Sheet
             </button>
           </div>
         </div>

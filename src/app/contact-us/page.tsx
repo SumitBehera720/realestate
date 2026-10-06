@@ -136,7 +136,7 @@ export default function ContactUsPage() {
                   <Icon icon="solar:check-circle-bold" width={48} height={48} className="text-emerald-400 mx-auto" />
                   <h4 className="text-2xl font-serif text-white">Message Dispatched!</h4>
                   <p className="text-sm font-sans text-emerald-200">
-                    Thank you for reaching out to SK Realtech. Our property consultant will contact you via phone and send your requested project dossier.
+                    Thank you for reaching out to SK Realtech. Our property consultant will contact you via phone and send your requested project brochure.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}

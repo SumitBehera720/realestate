@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
               Ready to find your ideal home in Bengaluru?
             </h3>
             <p className="text-sm text-zinc-400 font-light">
-              Connect with our senior property advisors for confidential dossiers and private site visits.
+              Connect with our senior property advisors for confidential brochures and private site visits.
             </p>
           </div>
           <div className="flex flex-wrap gap-4">

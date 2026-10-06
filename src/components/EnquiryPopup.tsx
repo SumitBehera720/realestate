@@ -10,12 +10,21 @@ export const EnquiryPopup: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    // Show popup after 3 seconds of page load
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    // Show popup after 10 seconds of page load
+    const initialTimer = setTimeout(() => {
+      if (!submitted) setIsOpen(true);
+    }, 10000);
+
+    // Then show it every 1 minute (60000 ms)
+    const interval = setInterval(() => {
+      if (!submitted) setIsOpen(true);
+    }, 60000);
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(interval);
+    };
+  }, [submitted]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

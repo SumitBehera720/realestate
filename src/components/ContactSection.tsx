@@ -75,7 +75,7 @@ export const ContactSection: React.FC = () => {
                 Thank you for your inquiry.
               </h3>
               <p className="text-sm font-sans text-zinc-300 max-w-md mx-auto leading-relaxed">
-                Your dossier request has been assigned to our senior property consultant. We will be in touch with complete discretion.
+                Your brochure request has been assigned to our senior property consultant. We will be in touch with complete discretion.
               </p>
               <button
                 onClick={() => setSubmitted(false)}

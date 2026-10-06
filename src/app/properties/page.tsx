@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { PageWrapper } from "@/components/PageWrapper";
@@ -18,6 +18,24 @@ function PropertiesContent() {
       setFilter(locationParam);
     }
   }, [locationParam]);
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setShowLeftArrow(scrollLeft > 5);
+      setShowRightArrow(Math.ceil(scrollLeft + clientWidth) < scrollWidth - 5);
+    }
+  };
+
+  useEffect(() => {
+    handleScroll();
+    window.addEventListener("resize", handleScroll);
+    return () => window.removeEventListener("resize", handleScroll);
+  }, []);
 
   const categories = [
     "All",
@@ -60,20 +78,38 @@ function PropertiesContent() {
 
       {/* 2. Filter Bar & Grid */}
       <section className="py-16 lg:py-24 px-6 lg:px-16 max-w-[1920px] mx-auto">
-        <div className="flex flex-wrap gap-2.5 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`px-5 py-2.5 rounded-full text-xs font-sans tracking-wide uppercase transition-all ${
-                filter === cat
-                  ? "bg-amber-500 text-zinc-950 font-bold shadow-md"
-                  : "bg-white/5 border border-white/10 text-zinc-300 hover:border-white/30 hover:text-white"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+        <div className="relative mb-12">
+          <div 
+            ref={scrollContainerRef}
+            onScroll={handleScroll}
+            className="flex overflow-x-auto gap-2.5 pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pr-12"
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`px-5 py-2.5 rounded-full text-xs font-sans tracking-wide uppercase transition-all whitespace-nowrap flex-shrink-0 ${
+                  filter === cat
+                    ? "bg-amber-500 text-zinc-950 font-bold shadow-md"
+                    : "bg-white/5 border border-white/10 text-zinc-300 hover:border-white/30 hover:text-white"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+          {/* Scroll Indicator Arrow Right */}
+          {showRightArrow && (
+            <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-zinc-950 via-zinc-950/80 to-transparent pointer-events-none flex items-center justify-end pb-2">
+              <Icon icon="solar:arrow-right-linear" width={24} height={24} className="text-zinc-300 animate-pulse mr-4" />
+            </div>
+          )}
+          {/* Scroll Indicator Arrow Left */}
+          {showLeftArrow && (
+            <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent pointer-events-none flex items-center justify-start pb-2">
+              <Icon icon="solar:arrow-left-linear" width={24} height={24} className="text-zinc-300 animate-pulse ml-4" />
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
