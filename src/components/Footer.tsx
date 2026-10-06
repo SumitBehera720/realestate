@@ -184,9 +184,14 @@ export const Footer: React.FC = () => {
       {/* Bottom Bar: Copyright & Disclaimers */}
       <div className="border-t border-white/10 py-6 px-6 lg:px-16 text-xs text-zinc-400 bg-zinc-950">
         <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-center md:text-left text-zinc-400">
-            &copy; {new Date().getFullYear()} {CONTACT_INFO.companyName}. All rights reserved. Registered Real Estate Consultant, Bengaluru.
-          </p>
+          <div className="text-center md:text-left text-zinc-400 space-y-1">
+            <p>
+              &copy; {new Date().getFullYear()} {CONTACT_INFO.companyName}. All rights reserved. Registered Real Estate Consultant, Bengaluru.
+            </p>
+            <p className="text-xs">
+              Developed by <a href="https://qubnixtechnology.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-amber-400 transition-colors">Qubnix Technology</a>
+            </p>
+          </div>
 
           <div className="flex flex-wrap gap-6 text-zinc-400">
             <Link href="/faq" className="hover:text-white transition-colors">
