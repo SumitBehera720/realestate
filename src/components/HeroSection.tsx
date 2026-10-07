@@ -6,17 +6,19 @@ import { Icon } from "./Icon";
 
 interface HeroSectionProps {
   isSplitActive?: boolean;
+  heroTitle?: string[];
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   isSplitActive = true,
+  heroTitle = ["Discover.", "Unmatched.", "Luxury."],
 }) => {
   return (
     <section className="relative h-screen min-h-[850px] w-full flex flex-col justify-end pb-20 md:pb-28 lg:pb-36 px-6 lg:px-16 bg-zinc-950 overflow-hidden dark-section">
       {/* Background Parallax Image */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <img
-          src="/images/hero-luxury-banner.jpg"
+          src="/images/new-launch-banner.jpg"
           alt="SK Realtech Luxury Developments Bengaluru"
           className="w-full h-full object-cover object-center sm:object-right-top opacity-90 scale-out js-parallax"
           data-speed="0.15"
@@ -34,15 +36,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </p>
 
           <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] text-white font-serif tracking-tight font-light leading-[0.92] mb-10 md:mb-12">
-            <span className="block">
-              <SplitText text="Discover." startDelay={0.4} />
-            </span>
-            <span className="block">
-              <SplitText text="Unmatched." startDelay={0.65} />
-            </span>
-            <span className="block">
-              <SplitText text="Luxury." startDelay={0.9} />
-            </span>
+            {heroTitle.map((line, idx) => (
+              <span key={idx} className="block">
+                <SplitText text={line} startDelay={0.4 + (idx * 0.25)} />
+              </span>
+            ))}
           </h1>
 
           <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start sm:items-center fade-up active delay-700">

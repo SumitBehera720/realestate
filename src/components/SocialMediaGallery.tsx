@@ -2,16 +2,20 @@
 import React from "react";
 import { Icon } from "./Icon";
 
-const images = [
-  "founder-award-1.jpeg",
-  "founder-award-2.jpeg",
-  "founder-award-3.jpeg",
-  "founder-award-4.jpeg",
-  "founder-award-5.jpeg",
-  "founder-award-6.jpg",
+const defaultImages = [
+  "/images/founder-award-1.jpeg",
+  "/images/founder-award-2.jpeg",
+  "/images/founder-award-3.jpeg",
+  "/images/founder-award-4.jpeg",
+  "/images/founder-award-5.jpeg",
+  "/images/founder-award-6.jpg",
 ];
 
-export const SocialMediaGallery: React.FC = () => {
+interface SocialMediaGalleryProps {
+  instagramImages?: string[];
+}
+
+export const SocialMediaGallery: React.FC<SocialMediaGalleryProps> = ({ instagramImages = defaultImages }) => {
   return (
     <section className="bg-zinc-950 py-20 lg:py-28 border-t border-white/10 overflow-hidden">
       <div className="max-w-[1920px] mx-auto px-6 lg:px-16 mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
@@ -31,9 +35,9 @@ export const SocialMediaGallery: React.FC = () => {
       
       <div className="max-w-[1920px] mx-auto px-6 lg:px-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {images.map((img, idx) => (
+          {instagramImages.map((img, idx) => (
             <a key={idx} href="https://www.instagram.com/skrealtech_official/" target="_blank" rel="noopener noreferrer" className="relative aspect-square rounded-xl overflow-hidden group block border border-white/10 shadow-lg">
-              <img src={`/images/${img}`} alt={`Instagram Post ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <img src={img.startsWith('/') || img.startsWith('http') ? img : `/images/${img}`} alt={`Instagram Post ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <Icon icon="mdi:instagram" width={32} height={32} className="text-white" />
               </div>

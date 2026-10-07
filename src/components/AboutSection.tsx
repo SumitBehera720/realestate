@@ -40,7 +40,7 @@ export const AboutSection: React.FC = () => {
               &ldquo;The real estate company you can trust to keep it real&rdquo; reflects our relentless commitment to honesty, transparency, and genuine service across Bengaluru since 2011.
             </p>
             <p>
-              In a market filled with complexity, we simplify the process with clear communication, authentic guidance, and verified RERA-approved developments like SBR One Residence.
+              In a market filled with complexity, we simplify the process with clear communication, authentic guidance, and verified RERA-approved developments like Sanjeevini Aarna.
             </p>
           </div>
 

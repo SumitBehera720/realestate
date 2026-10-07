@@ -16,7 +16,7 @@ import { Footer } from "@/components/Footer";
 import { EnquiryPopup } from "@/components/EnquiryPopup";
 import { SocialMediaGallery } from "@/components/SocialMediaGallery";
 
-export function HomeClient({ properties }: { properties: any[] }) {
+export function HomeClient({ properties, settings }: { properties: any[], settings?: Record<string, any> }) {
   const [curtainLifted, setCurtainLifted] = useState(false);
 
   const handleCurtainRevealed = useCallback(() => {
@@ -109,7 +109,7 @@ export function HomeClient({ properties }: { properties: any[] }) {
       <Navigation />
 
       {/* 3. Hero Section (Screenshot 2) */}
-      <HeroSection isSplitActive={curtainLifted} />
+      <HeroSection isSplitActive={curtainLifted} heroTitle={settings?.heroTitle} />
 
       {/* 4. Luxury Locations Marquee */}
       <MarqueeSection />
@@ -130,7 +130,7 @@ export function HomeClient({ properties }: { properties: any[] }) {
       <EditorialSection />
 
       {/* 10. Social Media Gallery */}
-      <SocialMediaGallery />
+      <SocialMediaGallery instagramImages={settings?.instagramImages} />
 
       {/* 11. Private Access Contact Desk */}
       <ContactSection />
