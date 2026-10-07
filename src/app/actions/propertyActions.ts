@@ -23,6 +23,13 @@ export async function addProperty(data: any) {
         bedrooms: data.bedrooms,
         area: data.area,
         heroImage: data.heroImage,
+        gallery: data.gallery || [],
+        description: data.description,
+        projectOverview: data.projectOverview,
+        architecturalVision: data.architecturalVision,
+        worldClassLifestyle: data.worldClassLifestyle,
+        keyParameters: data.keyParameters || {},
+        contactDetails: data.contactDetails || {},
       },
     });
     revalidatePath("/admin/properties");
@@ -30,6 +37,38 @@ export async function addProperty(data: any) {
   } catch (error) {
     console.error(error);
     return { success: false, error: "Failed to add property" };
+  }
+}
+
+export async function updateProperty(id: string, data: any) {
+  try {
+    await prisma.property.update({
+      where: { id },
+      data: {
+        title: data.title,
+        subtitle: data.subtitle,
+        propertyType: data.propertyType,
+        status: data.status,
+        price: data.price,
+        location: data.location,
+        fullAddress: data.fullAddress,
+        bedrooms: data.bedrooms,
+        area: data.area,
+        heroImage: data.heroImage,
+        gallery: data.gallery || [],
+        description: data.description,
+        projectOverview: data.projectOverview,
+        architecturalVision: data.architecturalVision,
+        worldClassLifestyle: data.worldClassLifestyle,
+        keyParameters: data.keyParameters || {},
+        contactDetails: data.contactDetails || {},
+      },
+    });
+    revalidatePath("/admin/properties");
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Failed to update property" };
   }
 }
 

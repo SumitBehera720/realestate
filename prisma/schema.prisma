@@ -7,20 +7,27 @@ datasource db {
 }
 
 model Property {
-  id             String   @id @default(cuid())
-  slug           String   @unique
-  title          String
-  subtitle       String?
-  propertyType   String?
-  status         String?
-  price          String?
-  location       String?
-  fullAddress    String?
-  bedrooms       String?
-  area           String?
-  heroImage      String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id                  String   @id @default(cuid())
+  slug                String   @unique
+  title               String
+  subtitle            String?
+  propertyType        String?
+  status              String?
+  price               String?
+  location            String?
+  fullAddress         String?
+  bedrooms            String?
+  area                String?
+  heroImage           String?
+  gallery             Json?    // Array of image URLs
+  description         String?  @db.Text
+  projectOverview     String?  @db.Text
+  architecturalVision String?  @db.Text
+  worldClassLifestyle String?  @db.Text
+  keyParameters       Json?    // Array of key parameters or structured data
+  contactDetails      Json?    // Structured contact info (phone, email, etc)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }
 
 model Enquiry {

@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { SplitText } from "./SplitText";
 import { Icon } from "./Icon";
-import { PROPERTIES } from "@/data/properties";
 
-export const HeritageVillaSection: React.FC = () => {
+export const HeritageVillaSection: React.FC<{ properties: any[] }> = ({ properties }) => {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState("SBR One Residence");
 
@@ -172,7 +171,7 @@ export const HeritageVillaSection: React.FC = () => {
 
         {/* 4 Flagship Property Cards */}
         <div className="max-w-[1920px] mx-auto px-6 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {PROPERTIES.map((item) => (
+          {properties.slice(0, 4).map((item) => (
             <Link
               key={item.id}
               href={`/properties/${item.slug}`}

@@ -3,12 +3,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
-import { Property } from "@/data/properties";
 import { CONTACT_INFO } from "@/data/siteData";
 
 interface Props {
-  property: Property;
-  allProperties: Property[];
+  property: any;
+  allProperties: any[];
 }
 
 export default function PropertyDetailClient({ property, allProperties }: Props) {
@@ -131,7 +130,7 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
 
           {/* Thumbnail Gallery Selector */}
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin">
-            {property.gallery.map((img, i) => (
+            {property.gallery.map((img: string, i: number) => (
               <button
                 key={i}
                 onClick={() => setActiveImage(img)}
@@ -172,7 +171,7 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
 
             <div className="p-5 bg-white/5 border border-white/10 rounded">
               <span className="text-xs text-zinc-400 font-sans block mb-1">Location</span>
-              <span className="text-lg font-serif text-white font-medium">{property.location.split(",")[0]}</span>
+              <span className="text-lg font-serif text-white font-medium">{property.location?.split(",")[0] || ""}</span>
             </div>
 
             {property.developmentSize && (
@@ -213,7 +212,7 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
           </div>
 
           <div className="space-y-5 text-base sm:text-lg font-sans font-light text-zinc-300 leading-relaxed">
-            {property.overview.map((paragraph, idx) => (
+            {property.overview?.map((paragraph: string, idx: number) => (
               <p key={idx}>{paragraph}</p>
             ))}
           </div>
@@ -222,7 +221,7 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
           <div className="pt-6">
             <h3 className="text-lg font-serif text-white mb-6">Key Development Highlights</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {property.highlights.map((h, i) => (
+              {property.highlights?.map((h: string, i: number) => (
                 <div key={i} className="flex items-start gap-3 p-3.5 bg-white/5 border border-white/10 rounded">
                   <Icon icon="solar:check-circle-bold" width={20} height={20} className="text-amber-400 shrink-0 mt-0.5" />
                   <span className="text-sm font-sans text-zinc-200">{h}</span>
@@ -235,7 +234,7 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
           <div className="pt-10">
             <h3 className="text-lg font-serif text-white mb-6">Construction &amp; Finish Specifications</h3>
             <div className="border border-white/10 divide-y divide-white/10 rounded overflow-hidden">
-              {property.specifications.map((spec, i) => (
+              {property.specifications?.map((spec: any, i: number) => (
                 <div key={i} className="p-4 sm:p-5 bg-white/[0.02] grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <span className="text-xs uppercase font-sans tracking-wider text-amber-400 font-semibold sm:col-span-1">
                     {spec.label}
@@ -372,7 +371,7 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            {property.amenities.map((amenity, i) => (
+            {property.amenities?.map((amenity: any, i: number) => (
               <div
                 key={i}
                 className="p-6 bg-white/[0.03] border border-white/10 rounded-lg hover:border-amber-400/50 hover:bg-white/[0.06] transition-all duration-300 flex flex-col items-center text-center group"
