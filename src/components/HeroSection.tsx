@@ -33,15 +33,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             Welcome to SK Realtech · Bengaluru
           </p>
 
-          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[9.5rem] text-white font-serif tracking-tight font-light leading-[0.92] mb-10 md:mb-12">
+          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] text-white font-serif tracking-tight font-light leading-[0.92] mb-10 md:mb-12">
             <span className="block">
-              <SplitText text="Curated." startDelay={0.4} />
+              <SplitText text="Discover." startDelay={0.4} />
             </span>
             <span className="block">
-              <SplitText text="Crafted." startDelay={0.65} />
+              <SplitText text="Unmatched." startDelay={0.65} />
             </span>
             <span className="block">
-              <SplitText text="Elevated." startDelay={0.9} />
+              <SplitText text="Luxury." startDelay={0.9} />
             </span>
           </h1>
 

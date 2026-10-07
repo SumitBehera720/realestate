@@ -65,21 +65,35 @@ export const Navigation: React.FC = () => {
           <nav className="hidden lg:flex items-center space-x-8 xl:space-x-10 text-xs font-sans font-medium tracking-[0.15em] uppercase text-zinc-300">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
+              const hasDropdown = link.label === "Services";
+              
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`transition-colors duration-300 py-1 relative ${
-                    isActive
-                      ? "text-amber-400 font-semibold"
-                      : "hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-amber-400 rounded-full" />
+                <div key={link.href} className="relative group">
+                  <Link
+                    href={link.href}
+                    className={`transition-colors duration-300 py-4 flex items-center gap-1 ${
+                      isActive
+                        ? "text-amber-400 font-semibold"
+                        : "hover:text-white"
+                    }`}
+                  >
+                    {link.label}
+                    {hasDropdown && <Icon icon="solar:alt-arrow-down-linear" width={14} height={14} className="group-hover:rotate-180 transition-transform duration-300" />}
+                    {isActive && (
+                      <span className="absolute bottom-2 left-0 w-full h-[2px] bg-amber-400 rounded-full" />
+                    )}
+                  </Link>
+
+                  {/* Dropdown Menu */}
+                  {hasDropdown && (
+                    <div className="absolute top-[100%] left-0 w-56 bg-zinc-950/95 backdrop-blur-xl border border-white/10 rounded-md shadow-2xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 flex flex-col py-2 z-50">
+                      <Link href="/services#sales" className="px-5 py-3 hover:bg-white/5 hover:text-amber-400 transition-colors text-[10px] tracking-widest text-zinc-300 border-b border-white/5">Property Sales</Link>
+                      <Link href="/services#management" className="px-5 py-3 hover:bg-white/5 hover:text-amber-400 transition-colors text-[10px] tracking-widest text-zinc-300 border-b border-white/5">Property Management</Link>
+                      <Link href="/services#consulting" className="px-5 py-3 hover:bg-white/5 hover:text-amber-400 transition-colors text-[10px] tracking-widest text-zinc-300 border-b border-white/5">Investment Consulting</Link>
+                      <Link href="/services#valuation" className="px-5 py-3 hover:bg-white/5 hover:text-amber-400 transition-colors text-[10px] tracking-widest text-zinc-300">Valuation & Advisory</Link>
+                    </div>
                   )}
-                </Link>
+                </div>
               );
             })}
           </nav>
