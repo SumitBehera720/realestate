@@ -22,9 +22,39 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
     setModalOpen(true);
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // We need formData to send to whatsapp, but the form doesn't use state.
+    // Let's use FormData object from the event target.
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    const name = (formData.get("name") || form.querySelector<HTMLInputElement>("input[type='text']")?.value || "") as string;
+    const phone = (formData.get("phone") || form.querySelector<HTMLInputElement>("input[type='tel']")?.value || "") as string;
+    const email = (formData.get("email") || form.querySelector<HTMLInputElement>("input[type='email']")?.value || "") as string;
+    
+    const { createEnquiry } = await import("@/app/actions/enquiryActions");
+    const { sendToWhatsApp } = await import("@/utils/whatsapp");
+    
+    const res = await createEnquiry({
+      name,
+      phone,
+      email,
+      property: property.title + " (Quick Action/Modal)"
+    });
+    
     setFormSubmitted(true);
+    
+    if (res.success) {
+      sendToWhatsApp({
+        name,
+        phone,
+        email,
+        property: property.title,
+        source: "Property Detail Page"
+      });
+    }
   };
 
   const otherProperties = allProperties.filter((p) => p.id !== property.id);

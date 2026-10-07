@@ -8,11 +8,40 @@ import { SERVICES, CONTACT_INFO } from "@/data/siteData";
 
 export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState("Buying / Selling");
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const name = (form.querySelector<HTMLInputElement>("input[type='text']")?.value || "") as string;
+    const phone = (form.querySelector<HTMLInputElement>("input[type='tel']")?.value || "") as string;
+    const email = (form.querySelector<HTMLInputElement>("input[type='email']")?.value || "") as string;
+    
+    const { createEnquiry } = await import("@/app/actions/enquiryActions");
+    const { sendToWhatsApp } = await import("@/utils/whatsapp");
+    
+    const res = await createEnquiry({
+      name,
+      phone,
+      email,
+      property: `Services Page - ${selectedService}`
+    });
+    
+    setIsSubmitting(false);
     setFormSubmitted(true);
+    
+    if (res.success) {
+      sendToWhatsApp({
+        name,
+        phone,
+        email,
+        property: selectedService,
+        source: "Services Page"
+      });
+    }
   };
 
   return (
@@ -371,9 +400,10 @@ export default function ServicesPage() {
 
               <button
                 type="submit"
-                className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-sans font-bold text-xs uppercase tracking-widest rounded transition-all shadow-xl hover:shadow-amber-500/25 cursor-pointer"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-sans font-bold text-xs uppercase tracking-widest rounded transition-all shadow-xl hover:shadow-amber-500/25 cursor-pointer disabled:opacity-50"
               >
-                Submit Enquiry
+                {isSubmitting ? "Submitting..." : "Submit Enquiry"}
               </button>
             </form>
           )}

@@ -5,10 +5,36 @@ import { CONTACT_INFO } from "@/data/siteData";
 
 export const ContactSection: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    const { createEnquiry } = await import("@/app/actions/enquiryActions");
+    const { sendToWhatsApp } = await import("@/utils/whatsapp");
+    
+    const fullName = `${formData.firstName} ${formData.lastName}`.trim();
+    
+    const res = await createEnquiry({
+      name: fullName,
+      phone: formData.phone,
+      email: formData.email,
+      property: `Homepage Contact Section - ${formData.message}`
+    });
+    
+    setIsSubmitting(false);
     setSubmitted(true);
+    
+    if (res.success) {
+      sendToWhatsApp({
+        name: fullName,
+        phone: formData.phone,
+        email: formData.email,
+        property: formData.message,
+        source: "Homepage Contact Section"
+      });
+    }
   };
 
   return (
@@ -94,6 +120,8 @@ export const ContactSection: React.FC = () => {
                   <input
                     type="text"
                     required
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                     placeholder="First Name"
                     className="w-full border-b border-white/20 py-3 bg-transparent text-white focus:border-amber-400 focus:outline-none transition-colors font-sans text-sm rounded-none placeholder:text-white/20"
                   />
@@ -104,6 +132,8 @@ export const ContactSection: React.FC = () => {
                   </label>
                   <input
                     type="text"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                     placeholder="Last Name"
                     className="w-full border-b border-white/20 py-3 bg-transparent text-white focus:border-amber-400 focus:outline-none transition-colors font-sans text-sm rounded-none placeholder:text-white/20"
                   />
@@ -117,6 +147,8 @@ export const ContactSection: React.FC = () => {
                 <input
                   type="email"
                   required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="name@email.com"
                   className="w-full border-b border-white/20 py-3 bg-transparent text-white focus:border-amber-400 focus:outline-none transition-colors font-sans text-sm rounded-none placeholder:text-white/20"
                 />
@@ -129,6 +161,8 @@ export const ContactSection: React.FC = () => {
                 <input
                   type="tel"
                   required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="98765 43210"
                   className="w-full border-b border-white/20 py-3 bg-transparent text-white focus:border-amber-400 focus:outline-none transition-colors font-sans text-sm rounded-none placeholder:text-white/20"
                 />
@@ -141,6 +175,8 @@ export const ContactSection: React.FC = () => {
                 <textarea
                   rows={3}
                   required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Inquiring about SBR One Residence, Resale properties, or Site Visit..."
                   className="w-full border-b border-white/20 py-3 bg-transparent text-white focus:border-amber-400 focus:outline-none transition-colors font-sans text-sm resize-none rounded-none placeholder:text-white/20"
                 />
@@ -148,9 +184,10 @@ export const ContactSection: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 py-4 text-xs font-sans font-bold tracking-[0.25em] uppercase rounded transition-colors mt-6 cursor-pointer shadow-xl"
+                disabled={isSubmitting}
+                className="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 py-4 text-xs font-sans font-bold tracking-[0.25em] uppercase rounded transition-colors mt-6 cursor-pointer shadow-xl disabled:opacity-50"
               >
-                Submit Confidentially
+                {isSubmitting ? "Submitting..." : "Submit Confidentially"}
               </button>
             </form>
           )}

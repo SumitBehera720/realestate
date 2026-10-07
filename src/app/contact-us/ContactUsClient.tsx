@@ -14,6 +14,7 @@ export default function ContactUsClient({ properties }: { properties: any[] }) {
     e.preventDefault();
     setIsSubmitting(true);
     const { createEnquiry } = await import("@/app/actions/enquiryActions");
+    const { sendToWhatsApp } = await import("@/utils/whatsapp");
     
     // Append custom time if selected
     let finalProperty = formData.property;
@@ -23,9 +24,19 @@ export default function ContactUsClient({ properties }: { properties: any[] }) {
       finalProperty += ` (Preferred Time: ${formData.timeSlot})`;
     }
 
-    await createEnquiry({ ...formData, property: finalProperty });
+    const res = await createEnquiry({ ...formData, property: finalProperty });
     setIsSubmitting(false);
     setSubmitted(true);
+    
+    if (res.success) {
+      sendToWhatsApp({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        property: finalProperty,
+        source: "Contact Us Page"
+      });
+    }
   };
 
   return (

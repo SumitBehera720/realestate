@@ -30,11 +30,12 @@ export const EnquiryPopup: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     const { createEnquiry } = await import("@/app/actions/enquiryActions");
+    const { sendToWhatsApp } = await import("@/utils/whatsapp");
     const propertyInfo = formData.visitDate 
       ? `General Enquiry Popup (Site Visit Requested: ${formData.visitDate})` 
       : "General Enquiry Popup";
       
-    await createEnquiry({ 
+    const res = await createEnquiry({ 
       name: formData.name,
       phone: formData.phone,
       email: formData.email,
@@ -42,6 +43,18 @@ export const EnquiryPopup: React.FC = () => {
     });
     setIsSubmitting(false);
     setSubmitted(true);
+    
+    if (res.success) {
+      sendToWhatsApp({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        property: propertyInfo,
+        source: "Enquiry Popup",
+        date: formData.visitDate
+      });
+    }
+    
     setTimeout(() => setIsOpen(false), 3000);
   };
 
