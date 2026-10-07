@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import { GlobalCurtain } from "@/components/GlobalCurtain";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { SettingsProvider } from "@/components/SettingsProvider";
 
 export const PageWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -76,13 +77,15 @@ export const PageWrapper: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-[#050505] text-white selection:bg-[#c5a059] selection:text-black">
-      <Navigation />
-      <div className="pt-24">
-        {/* Spacer for fixed nav */}
-        {children}
-      </div>
-      <Footer />
-    </main>
+    <SettingsProvider>
+      <main className="relative min-h-screen bg-[#050505] text-white selection:bg-[#c5a059] selection:text-black">
+        <Navigation />
+        <div className="pt-24">
+          {/* Spacer for fixed nav */}
+          {children}
+        </div>
+        <Footer />
+      </main>
+    </SettingsProvider>
   );
 };

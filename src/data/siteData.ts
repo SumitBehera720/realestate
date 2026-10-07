@@ -86,7 +86,7 @@ export const SERVICES = [
     subtitle: "Exclusive early access to Bangalore's finest projects",
     description:
       "Get exclusive pre-launch access to premium projects across Bangalore before they hit the open market. Secure early-bird pricing, priority unit selection, and VIP investment advantages.",
-    image: "/images/brigade-oasis.webp",
+    image: "/images/new-launch-banner.jpg",
     features: [
       "Exclusive pre-launch & soft-launch invitations",
       "Priority unit selection & early-bird pricing",

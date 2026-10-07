@@ -13,6 +13,9 @@ export default function SettingsClient({ initialSettings }: { initialSettings: R
     "/images/founder-award-5.jpeg",
     "/images/founder-award-6.jpg",
   ]);
+  const [contactPhone, setContactPhone] = useState(initialSettings?.contactPhone || "");
+  const [contactEmail, setContactEmail] = useState(initialSettings?.contactEmail || "");
+  const [contactAddress, setContactAddress] = useState(initialSettings?.contactAddress || "");
   const [isSaving, setIsSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
 
@@ -23,6 +26,9 @@ export default function SettingsClient({ initialSettings }: { initialSettings: R
     
     await updateSiteSetting("heroTitle", heroTitle);
     await updateSiteSetting("instagramImages", instagramImages);
+    if (contactPhone) await updateSiteSetting("contactPhone", contactPhone);
+    if (contactEmail) await updateSiteSetting("contactEmail", contactEmail);
+    if (contactAddress) await updateSiteSetting("contactAddress", contactAddress);
     
     setIsSaving(false);
     alert("Settings saved successfully!");
@@ -105,6 +111,42 @@ export default function SettingsClient({ initialSettings }: { initialSettings: R
                 </button>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
+          <h2 className="text-lg font-serif text-white mb-6 border-b border-white/10 pb-4">Contact Information (Footer)</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs text-zinc-400 block mb-2 uppercase tracking-wider">Phone Display (e.g. +91 98765 43210)</label>
+              <input 
+                type="text" 
+                value={contactPhone} 
+                onChange={(e) => setContactPhone(e.target.value)}
+                placeholder="Leave blank to use default"
+                className="w-full bg-zinc-950 border border-white/10 px-4 py-3 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" 
+              />
+            </div>
+            <div>
+              <label className="text-xs text-zinc-400 block mb-2 uppercase tracking-wider">Email Address</label>
+              <input 
+                type="email" 
+                value={contactEmail} 
+                onChange={(e) => setContactEmail(e.target.value)}
+                placeholder="Leave blank to use default"
+                className="w-full bg-zinc-950 border border-white/10 px-4 py-3 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" 
+              />
+            </div>
+            <div>
+              <label className="text-xs text-zinc-400 block mb-2 uppercase tracking-wider">Office Address</label>
+              <textarea 
+                value={contactAddress} 
+                onChange={(e) => setContactAddress(e.target.value)}
+                rows={3}
+                placeholder="Leave blank to use default"
+                className="w-full bg-zinc-950 border border-white/10 px-4 py-3 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400 resize-none" 
+              />
+            </div>
           </div>
         </div>
 

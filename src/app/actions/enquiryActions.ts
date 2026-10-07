@@ -38,3 +38,16 @@ export async function createEnquiry(data: { name: string, phone: string, email?:
     return { success: false, error: "Failed to submit enquiry" };
   }
 }
+
+export async function deleteEnquiry(id: string) {
+  try {
+    await prisma.enquiry.delete({
+      where: { id }
+    });
+    revalidatePath("/admin/enquiries");
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Failed to delete enquiry" };
+  }
+}

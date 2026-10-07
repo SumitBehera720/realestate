@@ -55,7 +55,21 @@ export function EnquiriesClient({ enquiries }: { enquiries: any[] }) {
                     </select>
                   </td>
                   <td className="px-6 py-4 text-right">
-                     <span className="text-xs text-zinc-600">{new Date(row.createdAt).toLocaleDateString()}</span>
+                     <div className="flex items-center justify-end gap-3">
+                       <span className="text-xs text-zinc-600 mr-2">{new Date(row.createdAt).toLocaleDateString()}</span>
+                       <button 
+                         onClick={async () => {
+                           if(confirm("Are you sure you want to delete this enquiry?")) {
+                             const { deleteEnquiry } = await import("@/app/actions/enquiryActions");
+                             await deleteEnquiry(row.id);
+                           }
+                         }}
+                         className="text-zinc-500 hover:text-red-400 transition-colors"
+                         title="Delete Enquiry"
+                       >
+                         <Icon icon="solar:trash-bin-trash-linear" width={18} height={18} />
+                       </button>
+                     </div>
                   </td>
                 </tr>
               ))}

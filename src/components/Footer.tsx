@@ -4,8 +4,11 @@ import Link from "next/link";
 import { Icon } from "./Icon";
 import { CONTACT_INFO } from "@/data/siteData";
 import { PROPERTIES } from "@/data/properties";
+import { useSettings } from "@/components/SettingsProvider";
 
 export const Footer: React.FC = () => {
+  const { contactPhone, contactEmail, contactAddress } = useSettings();
+
   return (
     <footer className="bg-[#08080a] text-zinc-300 border-t border-white/10 font-sans dark-section">
       {/* Top Banner / Call to Action */}
@@ -146,28 +149,28 @@ export const Footer: React.FC = () => {
           <div className="space-y-3.5 text-sm text-zinc-300">
             <div className="flex items-start gap-3">
               <Icon icon="solar:map-point-linear" width={18} height={18} className="text-amber-400 shrink-0 mt-0.5" />
-              <p className="text-xs leading-relaxed text-zinc-300">
-                {CONTACT_INFO.address}
+              <p className="text-xs leading-relaxed text-zinc-300 whitespace-pre-line">
+                {contactAddress}
               </p>
             </div>
 
             <div className="flex items-center gap-3">
               <Icon icon="solar:phone-linear" width={18} height={18} className="text-amber-400 shrink-0" />
               <a
-                href={`tel:${CONTACT_INFO.phone}`}
+                href={`tel:${contactPhone.replace(/[\s-]/g, '')}`}
                 className="text-xs font-medium text-zinc-200 hover:text-amber-400 transition-colors"
               >
-                {CONTACT_INFO.phoneDisplay}
+                {contactPhone}
               </a>
             </div>
 
             <div className="flex items-center gap-3">
               <Icon icon="solar:letter-linear" width={18} height={18} className="text-amber-400 shrink-0" />
               <a
-                href={`mailto:${CONTACT_INFO.email}`}
+                href={`mailto:${contactEmail}`}
                 className="text-xs text-zinc-200 hover:text-amber-400 transition-colors"
               >
-                {CONTACT_INFO.email}
+                {contactEmail}
               </a>
             </div>
 
