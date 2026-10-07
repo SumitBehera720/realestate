@@ -8,6 +8,7 @@ import { SERVICES, CONTACT_INFO } from "@/data/siteData";
 
 export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState("Buying / Selling");
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
