@@ -205,14 +205,87 @@ export function PropertiesClient({ properties }: { properties: any[] }) {
                 </div>
 
                 {/* Images Tab */}
-                <div className={activeTab === 'images' ? 'block space-y-4' : 'hidden'}>
+                <div className={activeTab === 'images' ? 'block space-y-6' : 'hidden'}>
                   <div>
-                    <label className="text-xs text-zinc-400 block mb-1">Main Hero Image URL</label>
-                    <input required type="text" value={formData.heroImage} onChange={e => setFormData({...formData, heroImage: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" />
+                    <label className="text-xs text-zinc-400 block mb-2">Main Hero Image (Direct Upload)</label>
+                    <div className="flex items-center gap-4">
+                      {formData.heroImage && (
+                        <img src={formData.heroImage} alt="Hero Preview" className="w-20 h-20 object-cover rounded border border-white/20" />
+                      )}
+                      <div className="flex-1">
+                        <input 
+                          type="file" 
+                          accept="image/*"
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              const fData = new FormData();
+                              fData.append("file", file);
+                              const res = await fetch("/api/upload", { method: "POST", body: fData });
+                              const result = await res.json();
+                              if (result.success) {
+                                setFormData({...formData, heroImage: result.url});
+                              } else {
+                                alert("Upload failed");
+                              }
+                            }
+                          }}
+                          className="w-full text-sm text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-zinc-950 hover:file:bg-amber-400"
+                        />
+                        <p className="text-[10px] text-zinc-500 mt-2">Select an image from your device.</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <label className="text-xs text-zinc-400 block mb-1">Gallery Images (comma separated URLs)</label>
-                    <textarea rows={4} value={formData.gallery} onChange={e => setFormData({...formData, gallery: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="/images/gallery1.jpg, /images/gallery2.jpg" />
+                  <div className="pt-4 border-t border-white/10">
+                    <label className="text-xs text-zinc-400 block mb-2">Gallery Images (Direct Upload)</label>
+                    
+                    <input 
+                      type="file" 
+                      accept="image/*"
+                      multiple
+                      onChange={async (e) => {
+                        const files = Array.from(e.target.files || []);
+                        const urls: string[] = [];
+                        for (const file of files) {
+                          const fData = new FormData();
+                          fData.append("file", file);
+                          const res = await fetch("/api/upload", { method: "POST", body: fData });
+                          const result = await res.json();
+                          if (result.success) urls.push(result.url);
+                        }
+                        if (urls.length > 0) {
+                          const currentGallery = formData.gallery ? formData.gallery.split(",").map(s => s.trim()).filter(Boolean) : [];
+                          setFormData({
+                            ...formData, 
+                            gallery: [...currentGallery, ...urls].join(", ")
+                          });
+                        }
+                      }}
+                      className="w-full mb-3 text-sm text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-zinc-950 hover:file:bg-amber-400"
+                    />
+                    
+                    {formData.gallery && (
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {formData.gallery.split(",").map(s => s.trim()).filter(Boolean).map((img, i) => (
+                          <div key={i} className="relative group">
+                            <img src={img} alt={`Gallery ${i}`} className="w-16 h-16 object-cover rounded border border-white/20" />
+                            <button 
+                              type="button"
+                              onClick={() => {
+                                const arr = formData.gallery.split(",").map(s => s.trim()).filter(Boolean);
+                                arr.splice(i, 1);
+                                setFormData({...formData, gallery: arr.join(", ")});
+                              }}
+                              className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              <Icon icon="solar:close-circle-bold" width={14} height={14} />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    
+                    <textarea rows={2} value={formData.gallery} onChange={e => setFormData({...formData, gallery: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-zinc-500 rounded-lg focus:outline-none mt-3" placeholder="You can also paste image URLs directly separated by commas..." />
                   </div>
                 </div>
 
