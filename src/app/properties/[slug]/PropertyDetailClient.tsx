@@ -315,12 +315,36 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
 
               <div>
                 <label className="text-xs font-sans text-zinc-300 block mb-1.5 font-medium">
-                  Preferred Site Visit Date
+                  Preferred Site Visit Date &amp; Time
                 </label>
-                <input
-                  type="date"
-                  className="w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400"
-                />
+                <div className="grid grid-cols-2 gap-3">
+                  <input
+                    type="date"
+                    className="w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400"
+                  />
+                  <select 
+                    className="w-full bg-zinc-800 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      const input = document.getElementById("quickCustomTime") as HTMLInputElement;
+                      if (input) input.style.display = val === "Custom Time Slot" ? "block" : "none";
+                    }}
+                  >
+                    <option>09:00 AM - 11:00 AM</option>
+                    <option>11:00 AM - 01:00 PM</option>
+                    <option>01:00 PM - 03:00 PM</option>
+                    <option>03:00 PM - 05:00 PM</option>
+                    <option>05:00 PM - 07:00 PM</option>
+                    <option>07:00 PM - 09:00 PM</option>
+                    <option value="Custom Time Slot">Custom Time Slot</option>
+                  </select>
+                  <input
+                    id="quickCustomTime"
+                    type="time"
+                    style={{ display: "none" }}
+                    className="col-span-2 w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400"
+                  />
+                </div>
               </div>
 
               <button
@@ -520,12 +544,28 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
                       required
                       className="w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400"
                     />
-                    <select className="w-full bg-zinc-800 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400">
-                      <option>10:00 AM</option>
-                      <option>12:00 PM</option>
-                      <option>02:00 PM</option>
-                      <option>04:00 PM</option>
+                    <select 
+                      className="w-full bg-zinc-800 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        const input = document.getElementById("customTimeInput") as HTMLInputElement;
+                        if (input) input.style.display = val === "Custom Time Slot" ? "block" : "none";
+                      }}
+                    >
+                      <option>09:00 AM - 11:00 AM</option>
+                      <option>11:00 AM - 01:00 PM</option>
+                      <option>01:00 PM - 03:00 PM</option>
+                      <option>03:00 PM - 05:00 PM</option>
+                      <option>05:00 PM - 07:00 PM</option>
+                      <option>07:00 PM - 09:00 PM</option>
+                      <option value="Custom Time Slot">Custom Time Slot</option>
                     </select>
+                    <input
+                      id="customTimeInput"
+                      type="time"
+                      style={{ display: "none" }}
+                      className="col-span-2 w-full bg-white/5 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400"
+                    />
                   </div>
                 )}
                 <button
