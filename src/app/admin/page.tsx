@@ -1,12 +1,18 @@
-"use client";
 import React from "react";
 import { AdminLayout } from "@/components/AdminLayout";
 import { Icon } from "@/components/Icon";
 
 import { CONTACT_INFO } from "@/data/siteData";
-import { PROPERTIES } from "@/data/properties";
+import { getProperties } from "@/app/actions/propertyActions";
+import { getEnquiries } from "@/app/actions/enquiryActions";
 
-export default function AdminDashboardPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AdminDashboardPage() {
+  const properties = await getProperties();
+  const enquiries = await getEnquiries();
+  const recentEnquiries = enquiries.slice(0, 5);
+
   return (
     <AdminLayout>
       <div className="mb-8">
@@ -16,9 +22,9 @@ export default function AdminDashboardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {[
-          { label: "Total Properties Listed", value: PROPERTIES.length, change: "0%", icon: "solar:home-2-bold", color: "text-blue-400", bg: "bg-blue-400/10" },
+          { label: "Total Properties Listed", value: properties.length, change: "0%", icon: "solar:home-2-bold", color: "text-blue-400", bg: "bg-blue-400/10" },
           { label: "Properties Handed Over", value: CONTACT_INFO.stats.find(s => s.label === "Properties Handed Over")?.value || "500+", change: "0%", icon: "solar:calendar-bold", color: "text-amber-400", bg: "bg-amber-400/10" },
-          { label: "Happy Customers", value: CONTACT_INFO.stats.find(s => s.label === "Happy Customers")?.value || "1.5K+", change: "0%", icon: "solar:users-group-two-rounded-bold", color: "text-emerald-400", bg: "bg-emerald-400/10" },
+          { label: "Total Enquiries", value: enquiries.length, change: "0%", icon: "solar:users-group-two-rounded-bold", color: "text-emerald-400", bg: "bg-emerald-400/10" },
         ].map((stat, i) => (
           <div key={i} className="bg-zinc-900 border border-white/10 rounded-xl p-6">
             <div className="flex items-center justify-between mb-4">
@@ -39,7 +45,7 @@ export default function AdminDashboardPage() {
         <div className="lg:col-span-2 bg-zinc-900 border border-white/10 rounded-xl p-6">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-serif text-white">Recent Enquiries</h3>
-            <button className="text-xs text-amber-400 hover:underline">View All</button>
+            <a href="/admin/enquiries" className="text-xs text-amber-400 hover:underline">View All</a>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-zinc-400">
@@ -52,16 +58,13 @@ export default function AdminDashboardPage() {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { name: "Rahul Verma", prop: "SBR One Residence", date: "Oct 3, 2026", status: "New" },
-                  { name: "Priya Menon", prop: "SBR Global Queens Ville", date: "Oct 2, 2026", status: "Contacted" },
-                  { name: "Amit Singh", prop: "Brigade Oasis", date: "Oct 1, 2026", status: "Site Visit" },
-                  { name: "Neha Sharma", prop: "SBR Minara", date: "Sep 30, 2026", status: "New" },
-                ].map((row, i) => (
+                {recentEnquiries.length === 0 ? (
+                  <tr><td colSpan={4} className="text-center py-6 text-zinc-500">No enquiries yet</td></tr>
+                ) : recentEnquiries.map((row, i) => (
                   <tr key={i} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
                     <td className="px-4 py-4 font-medium text-white">{row.name}</td>
-                    <td className="px-4 py-4">{row.prop}</td>
-                    <td className="px-4 py-4">{row.date}</td>
+                    <td className="px-4 py-4">{row.property || "-"}</td>
+                    <td className="px-4 py-4">{new Date(row.createdAt).toLocaleDateString()}</td>
                     <td className="px-4 py-4">
                       <span className={`text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full font-medium ${
                         row.status === 'New' ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' :
@@ -81,25 +84,25 @@ export default function AdminDashboardPage() {
         <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
           <h3 className="text-lg font-serif text-white mb-6">Quick Actions</h3>
           <div className="space-y-3">
-            <button className="w-full flex items-center gap-3 p-4 bg-zinc-950 border border-white/5 hover:border-amber-500/30 hover:bg-amber-500/5 transition-all rounded-lg text-left group">
+            <a href="/admin/properties" className="block w-full flex items-center gap-3 p-4 bg-zinc-950 border border-white/5 hover:border-amber-500/30 hover:bg-amber-500/5 transition-all rounded-lg text-left group">
               <div className="text-amber-400 group-hover:scale-110 transition-transform">
                 <Icon icon="solar:add-square-linear" width={24} height={24} />
               </div>
               <div>
-                <span className="block text-sm font-medium text-white mb-0.5">Add New Property</span>
-                <span className="block text-xs text-zinc-500">List a new real estate project</span>
+                <span className="block text-sm font-medium text-white mb-0.5">Manage Properties</span>
+                <span className="block text-xs text-zinc-500">Add or edit real estate projects</span>
               </div>
-            </button>
-            <button className="w-full flex items-center gap-3 p-4 bg-zinc-950 border border-white/5 hover:border-amber-500/30 hover:bg-amber-500/5 transition-all rounded-lg text-left group">
+            </a>
+            <a href="/admin/enquiries" className="block w-full flex items-center gap-3 p-4 bg-zinc-950 border border-white/5 hover:border-amber-500/30 hover:bg-amber-500/5 transition-all rounded-lg text-left group">
               <div className="text-blue-400 group-hover:scale-110 transition-transform">
                 <Icon icon="solar:document-add-linear" width={24} height={24} />
               </div>
               <div>
-                <span className="block text-sm font-medium text-white mb-0.5">Publish Market Report</span>
-                <span className="block text-xs text-zinc-500">Add a new blog post or insight</span>
+                <span className="block text-sm font-medium text-white mb-0.5">View Enquiries</span>
+                <span className="block text-xs text-zinc-500">Check latest lead submissions</span>
               </div>
-            </button>
-            <button className="w-full flex items-center gap-3 p-4 bg-zinc-950 border border-white/5 hover:border-amber-500/30 hover:bg-amber-500/5 transition-all rounded-lg text-left group">
+            </a>
+            <a href="/admin/settings" className="block w-full flex items-center gap-3 p-4 bg-zinc-950 border border-white/5 hover:border-amber-500/30 hover:bg-amber-500/5 transition-all rounded-lg text-left group">
               <div className="text-emerald-400 group-hover:scale-110 transition-transform">
                 <Icon icon="solar:settings-linear" width={24} height={24} />
               </div>
@@ -107,7 +110,7 @@ export default function AdminDashboardPage() {
                 <span className="block text-sm font-medium text-white mb-0.5">Global Settings</span>
                 <span className="block text-xs text-zinc-500">Update phone numbers & stats</span>
               </div>
-            </button>
+            </a>
           </div>
         </div>
       </div>
