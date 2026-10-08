@@ -13,7 +13,8 @@ export function PropertiesClient({ properties }: { properties: any[] }) {
     subtitle: "",
     propertyType: "",
     status: "Ready to Move",
-    price: "",
+    badge: "",
+    price: "₹ ",
     location: "",
     fullAddress: "",
     bedrooms: "",
@@ -45,6 +46,7 @@ export function PropertiesClient({ properties }: { properties: any[] }) {
       worldClassLifestyle: prop.worldClassLifestyle || "",
       fullAddress: prop.fullAddress || "",
       subtitle: prop.subtitle || "",
+      badge: prop.badge || "",
       propertyType: prop.propertyType || "",
       bedrooms: prop.bedrooms || "",
       area: prop.area || "",
@@ -173,6 +175,10 @@ export function PropertiesClient({ properties }: { properties: any[] }) {
                       <input type="text" value={formData.subtitle} onChange={e => setFormData({...formData, subtitle: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" />
                     </div>
                     <div>
+                      <label className="text-xs text-zinc-400 block mb-1">Badge (Optional)</label>
+                      <input type="text" value={formData.badge} onChange={e => setFormData({...formData, badge: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. Best Seller" />
+                    </div>
+                    <div>
                       <label className="text-xs text-zinc-400 block mb-1">Location (Area, City)</label>
                       <input required type="text" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. Whitefield, Bengaluru" />
                     </div>
@@ -191,7 +197,14 @@ export function PropertiesClient({ properties }: { properties: any[] }) {
                     </div>
                     <div>
                       <label className="text-xs text-zinc-400 block mb-1">Price String</label>
-                      <input required type="text" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. ₹1.2 Cr Onwards" />
+                      <input required type="text" value={formData.price} onChange={e => {
+                        let val = e.target.value;
+                        if (!val.startsWith("₹ ")) {
+                          val = val.replace("₹", "").trim();
+                          val = val ? `₹ ${val}` : "₹ ";
+                        }
+                        setFormData({...formData, price: val});
+                      }} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. ₹ 1.2 Cr Onwards" />
                     </div>
                     <div>
                       <label className="text-xs text-zinc-400 block mb-1">Bedrooms</label>

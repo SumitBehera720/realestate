@@ -15,6 +15,7 @@ export async function addProperty(data: any) {
         title: data.title,
         slug: (data.title || "unnamed").toString().toLowerCase().replace(/[^a-z0-9]+/g, "-"),
         subtitle: data.subtitle,
+        badge: data.badge || null,
         propertyType: data.propertyType,
         status: data.status,
         price: data.price,
@@ -47,6 +48,7 @@ export async function updateProperty(id: string, data: any) {
       data: {
         title: data.title,
         subtitle: data.subtitle,
+        badge: data.badge || null,
         propertyType: data.propertyType,
         status: data.status,
         price: data.price,

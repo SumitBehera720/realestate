@@ -187,6 +187,11 @@ export const HeritageVillaSection: React.FC<{ properties: any[] }> = ({ properti
                 <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-sm px-3 py-1.5 text-xs uppercase font-sans font-semibold tracking-wider text-amber-400 border border-white/10 rounded">
                   {item.price}
                 </div>
+                {item.badge && (
+                  <div className="absolute bottom-4 left-4 bg-red-500/90 backdrop-blur-sm px-3 py-1 text-xs font-sans uppercase font-bold text-white rounded shadow-md border border-white/20">
+                    {item.badge}
+                  </div>
+                )}
               </div>
 
               <div className="p-6 flex flex-col justify-between flex-1">

@@ -24,6 +24,7 @@ model Property {
   projectOverview     String?  @db.Text
   architecturalVision String?  @db.Text
   worldClassLifestyle String?  @db.Text
+  badge               String?
   keyParameters       Json?    // Array of key parameters or structured data
   contactDetails      Json?    // Structured contact info (phone, email, etc)
   createdAt           DateTime @default(now())

@@ -132,6 +132,11 @@ function PropertiesContent({ properties }: { properties: any[] }) {
                   <div className="absolute top-4 right-4 bg-amber-500 text-zinc-950 px-3 py-1 text-xs font-sans font-bold rounded shadow-md">
                     {prop.price}
                   </div>
+                  {prop.badge && (
+                    <div className="absolute bottom-4 left-4 bg-red-500/90 backdrop-blur-sm px-3 py-1 text-xs font-sans uppercase font-bold text-white rounded shadow-md border border-white/20">
+                      {prop.badge}
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-8 flex flex-col justify-between flex-1 space-y-6">
