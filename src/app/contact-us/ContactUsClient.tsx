@@ -7,7 +7,7 @@ import { CONTACT_INFO } from "@/data/siteData";
 
 export default function ContactUsClient({ properties }: { properties: any[] }) {
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: "", phone: "", email: "", property: "General Inquiry", timeSlot: "09:00 AM - 11:00 AM", customTime: "" });
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", property: "Property", timeSlot: "09:00 AM - 11:00 AM", customTime: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -210,14 +210,17 @@ export default function ContactUsClient({ properties }: { properties: any[] }) {
                         onChange={(e) => setFormData({ ...formData, property: e.target.value })}
                         className="w-full bg-zinc-800 border border-white/15 px-4 py-3 text-sm text-white rounded focus:outline-none focus:border-amber-400"
                       >
+                        <option value="Property">Property</option>
+                        <option value="Home loan">Home loan</option>
+                        <option value="documentation">documentation</option>
+                        <option value="interior">interior</option>
+                        <option value="new launch">new launch</option>
+                        <option value="personal loan">personal loan</option>
                         {properties.map((p) => (
-                          <option key={p.id} value={p.title}>
+                          <option key={p.id} value={`Property - ${p.title}`}>
                             {p.title} ({p.location?.split(",")[0] || "Location"})
                           </option>
                         ))}
-                        <option value="Commercial">Commercial Properties</option>
-                        <option value="Resale">Resale &amp; Liquidations</option>
-                        <option value="General Inquiry">General Inquiry</option>
                       </select>
                     </div>
                   </div>

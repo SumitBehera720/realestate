@@ -16,6 +16,12 @@ export default function SettingsClient({ initialSettings }: { initialSettings: R
   const [contactPhone, setContactPhone] = useState(initialSettings?.contactPhone || "");
   const [contactEmail, setContactEmail] = useState(initialSettings?.contactEmail || "");
   const [contactAddress, setContactAddress] = useState(initialSettings?.contactAddress || "");
+  const [stats, setStats] = useState(initialSettings?.stats || {
+    yearsExperience: "15+",
+    happyCustomers: "1.5K+",
+    propertiesHandedOver: "500+",
+    nrisServed: "300+",
+  });
   const [isSaving, setIsSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
 
@@ -29,6 +35,7 @@ export default function SettingsClient({ initialSettings }: { initialSettings: R
     if (contactPhone) await updateSiteSetting("contactPhone", contactPhone);
     if (contactEmail) await updateSiteSetting("contactEmail", contactEmail);
     if (contactAddress) await updateSiteSetting("contactAddress", contactAddress);
+    await updateSiteSetting("stats", stats);
     
     setIsSaving(false);
     alert("Settings saved successfully!");
@@ -145,6 +152,48 @@ export default function SettingsClient({ initialSettings }: { initialSettings: R
                 rows={3}
                 placeholder="Leave blank to use default"
                 className="w-full bg-zinc-950 border border-white/10 px-4 py-3 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400 resize-none" 
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
+          <h2 className="text-lg font-serif text-white mb-6 border-b border-white/10 pb-4">Global Statistics</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs text-zinc-400 block mb-2 uppercase tracking-wider">Years Experience</label>
+              <input 
+                type="text" 
+                value={stats.yearsExperience} 
+                onChange={(e) => setStats({ ...stats, yearsExperience: e.target.value })}
+                className="w-full bg-zinc-950 border border-white/10 px-4 py-3 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" 
+              />
+            </div>
+            <div>
+              <label className="text-xs text-zinc-400 block mb-2 uppercase tracking-wider">Happy Customers</label>
+              <input 
+                type="text" 
+                value={stats.happyCustomers} 
+                onChange={(e) => setStats({ ...stats, happyCustomers: e.target.value })}
+                className="w-full bg-zinc-950 border border-white/10 px-4 py-3 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" 
+              />
+            </div>
+            <div>
+              <label className="text-xs text-zinc-400 block mb-2 uppercase tracking-wider">Properties Handed Over</label>
+              <input 
+                type="text" 
+                value={stats.propertiesHandedOver} 
+                onChange={(e) => setStats({ ...stats, propertiesHandedOver: e.target.value })}
+                className="w-full bg-zinc-950 border border-white/10 px-4 py-3 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" 
+              />
+            </div>
+            <div>
+              <label className="text-xs text-zinc-400 block mb-2 uppercase tracking-wider">NRIs Served</label>
+              <input 
+                type="text" 
+                value={stats.nrisServed} 
+                onChange={(e) => setStats({ ...stats, nrisServed: e.target.value })}
+                className="w-full bg-zinc-950 border border-white/10 px-4 py-3 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" 
               />
             </div>
           </div>

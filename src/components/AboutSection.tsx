@@ -3,8 +3,10 @@ import React from "react";
 import Link from "next/link";
 import { SplitText } from "./SplitText";
 import { CONTACT_INFO } from "@/data/siteData";
+import { useSettings } from "./SettingsProvider";
 
 export const AboutSection: React.FC = () => {
+  const { stats } = useSettings();
   return (
     <section
       id="about"
@@ -59,19 +61,37 @@ export const AboutSection: React.FC = () => {
             <div className="grid grid-cols-2 gap-8 sm:gap-12">
               <div>
                 <div className="text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight text-zinc-900 mb-2 sm:mb-3 font-light">
-                  1,500<span className="text-2xl sm:text-3xl font-light text-amber-600">+</span>
+                  {stats.yearsExperience.replace(/\D/g, '')}<span className="text-2xl sm:text-3xl font-light text-amber-600">+</span>
                 </div>
                 <div className="text-xs font-sans uppercase tracking-[0.2em] text-zinc-500 font-medium">
-                  HAPPY FAMILIES
+                  YEARS EXPERIENCE
                 </div>
               </div>
 
               <div>
                 <div className="text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight text-zinc-900 mb-2 sm:mb-3 font-light">
-                  500<span className="text-2xl sm:text-3xl font-light text-amber-600">+</span>
+                  {stats.happyCustomers.replace(/\+/g, '')}<span className="text-2xl sm:text-3xl font-light text-amber-600">+</span>
                 </div>
                 <div className="text-xs font-sans uppercase tracking-[0.2em] text-zinc-500 font-medium">
-                  PROPERTIES LISTED
+                  HAPPY CUSTOMERS
+                </div>
+              </div>
+
+              <div>
+                <div className="text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight text-zinc-900 mb-2 sm:mb-3 font-light">
+                  {stats.propertiesHandedOver.replace(/\D/g, '')}<span className="text-2xl sm:text-3xl font-light text-amber-600">+</span>
+                </div>
+                <div className="text-xs font-sans uppercase tracking-[0.2em] text-zinc-500 font-medium">
+                  PROPERTIES HANDED OVER
+                </div>
+              </div>
+
+              <div>
+                <div className="text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight text-zinc-900 mb-2 sm:mb-3 font-light">
+                  {stats.nrisServed.replace(/\D/g, '')}<span className="text-2xl sm:text-3xl font-light text-amber-600">+</span>
+                </div>
+                <div className="text-xs font-sans uppercase tracking-[0.2em] text-zinc-500 font-medium">
+                  NRIs SERVED
                 </div>
               </div>
             </div>

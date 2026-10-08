@@ -6,12 +6,24 @@ type SettingsContextType = {
   contactPhone: string;
   contactEmail: string;
   contactAddress: string;
+  stats: {
+    yearsExperience: string;
+    happyCustomers: string;
+    propertiesHandedOver: string;
+    nrisServed: string;
+  };
 };
 
 const SettingsContext = createContext<SettingsContextType>({
   contactPhone: CONTACT_INFO.phoneDisplay,
   contactEmail: CONTACT_INFO.email,
   contactAddress: CONTACT_INFO.address,
+  stats: {
+    yearsExperience: "15+",
+    happyCustomers: "1.5K+",
+    propertiesHandedOver: "500+",
+    nrisServed: "300+",
+  }
 });
 
 export const useSettings = () => useContext(SettingsContext);
@@ -21,6 +33,12 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     contactPhone: CONTACT_INFO.phoneDisplay,
     contactEmail: CONTACT_INFO.email,
     contactAddress: CONTACT_INFO.address,
+    stats: {
+      yearsExperience: "15+",
+      happyCustomers: "1.5K+",
+      propertiesHandedOver: "500+",
+      nrisServed: "300+",
+    }
   });
 
   useEffect(() => {
@@ -33,6 +51,12 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             contactPhone: data.contactPhone || CONTACT_INFO.phoneDisplay,
             contactEmail: data.contactEmail || CONTACT_INFO.email,
             contactAddress: data.contactAddress || CONTACT_INFO.address,
+            stats: data.stats || {
+              yearsExperience: "15+",
+              happyCustomers: "1.5K+",
+              propertiesHandedOver: "500+",
+              nrisServed: "300+",
+            }
           });
         }
       } catch (err) {

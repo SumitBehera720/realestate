@@ -6,7 +6,7 @@ import { CONTACT_INFO } from "@/data/siteData";
 export const ContactSection: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", enquiryType: "Property", message: "" });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ export const ContactSection: React.FC = () => {
       name: fullName,
       phone: formData.phone,
       email: formData.email,
-      property: `Homepage Contact Section - ${formData.message}`
+      property: `[${formData.enquiryType}] Homepage Contact Section - ${formData.message}`
     });
     
     setIsSubmitting(false);
@@ -166,6 +166,25 @@ export const ContactSection: React.FC = () => {
                   placeholder="98765 43210"
                   className="w-full border-b border-white/20 py-3 bg-transparent text-white focus:border-amber-400 focus:outline-none transition-colors font-sans text-sm rounded-none placeholder:text-white/20"
                 />
+              </div>
+
+              <div className="relative group">
+                <label className="block text-xs font-sans uppercase tracking-[0.2em] text-zinc-400 mb-2">
+                  Enquiry Type *
+                </label>
+                <select
+                  required
+                  value={formData.enquiryType}
+                  onChange={(e) => setFormData({ ...formData, enquiryType: e.target.value })}
+                  className="w-full border-b border-white/20 py-3 bg-transparent text-white focus:border-amber-400 focus:outline-none transition-colors font-sans text-sm rounded-none appearance-none"
+                >
+                  <option value="Property" className="bg-zinc-900">Property</option>
+                  <option value="Home loan" className="bg-zinc-900">Home loan</option>
+                  <option value="documentation" className="bg-zinc-900">documentation</option>
+                  <option value="interior" className="bg-zinc-900">interior</option>
+                  <option value="new launch" className="bg-zinc-900">new launch</option>
+                  <option value="personal loan" className="bg-zinc-900">personal loan</option>
+                </select>
               </div>
 
               <div className="relative group">
