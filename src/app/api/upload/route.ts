@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
-import { existsSync } from "fs";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: "bsu0beoj",
+  api_key: "838987186976411",
+  api_secret: "uQFzzqnZWJLhzJmDN8NE3uibP1E"
+});
 
 export async function POST(req: NextRequest) {
   try {
@@ -14,26 +18,22 @@ export async function POST(req: NextRequest) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    
-    // Create uploads directory if it doesn't exist
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true });
-    }
 
-    // Generate unique filename
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1E9);
-    const originalName = typeof file.name === "string" ? file.name : "upload.jpg";
-    const filename = uniqueSuffix + "-" + originalName.replace(/[^a-zA-Z0-9.-]/g, "_");
-    const filepath = path.join(uploadDir, filename);
+    // Convert buffer to data URI
+    const base64Data = buffer.toString("base64");
+    const mimeType = file.type || "image/jpeg";
+    const fileUri = `data:${mimeType};base64,${base64Data}`;
 
-    // Save file
-    await writeFile(filepath, buffer);
+    // Upload to Cloudinary
+    const uploadResponse = await cloudinary.uploader.upload(fileUri, {
+      folder: "realesate",
+    });
 
-    // Return the public URL
-    const publicUrl = `/uploads/${filename}`;
-    
-    return NextResponse.json({ success: true, url: publicUrl });
+    return NextResponse.json({ 
+      success: true, 
+      url: uploadResponse.secure_url, 
+      fileUrl: uploadResponse.secure_url 
+    });
   } catch (error) {
     console.error("Error uploading file:", error);
     return NextResponse.json({ success: false, error: "Upload failed" }, { status: 500 });
