@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { prisma } from '../src/lib/prisma';
 import { PROPERTIES } from '../src/data/properties';
 
@@ -14,6 +15,7 @@ async function main() {
       subtitle: prop.subtitle,
       propertyType: prop.propertyType,
       status: prop.status,
+      badge: prop.badge || null,
       price: prop.price,
       location: prop.location,
       fullAddress: prop.fullAddress,
@@ -25,7 +27,14 @@ async function main() {
       keyParameters: {
         highlights: prop.highlights,
         amenities: prop.amenities,
-        specifications: prop.specifications
+        specifications: prop.specifications,
+        bathrooms: prop.bathrooms,
+        totalUnits: prop.totalUnits,
+        developmentSize: prop.developmentSize,
+        noOfBlocks: prop.noOfBlocks,
+        completionDate: prop.completionDate,
+        reraNo: prop.reraNo,
+        priceNumeric: prop.priceNumeric,
       }
     };
 

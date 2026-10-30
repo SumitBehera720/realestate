@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
       {/* Main Footer Links & Info Grid */}
       <div className="max-w-[1920px] mx-auto py-16 px-6 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16">
         {/* Column 1: Brand & Slogan */}
-        <div className="lg:col-span-4 space-y-6">
+        <div className="lg:col-span-3 space-y-6">
           <Link href="/" className="inline-flex items-center space-x-3 group">
             <div className="p-1.5 bg-white rounded-md shadow-sm border border-white/20">
               <img
@@ -54,44 +54,74 @@ export const Footer: React.FC = () => {
               />
             </div>
             <div>
-              <span className="text-2xl font-serif text-white font-medium tracking-tight block leading-tight">
+              <span className="text-xl font-serif text-white font-medium tracking-tight block leading-tight">
                 SK REALTECH
               </span>
-              <span className="text-[10px] font-sans tracking-[0.1em] text-zinc-400 uppercase font-normal">
+              <span className="text-[9px] font-sans tracking-[0.1em] text-zinc-400 uppercase font-normal">
                 Exploring the science of real estate
               </span>
             </div>
           </Link>
 
-          <p className="text-sm text-zinc-300 leading-relaxed font-normal">
-            &ldquo;{CONTACT_INFO.tagline}&rdquo; Facilitating people to buy, sell, and invest in premium residential and commercial properties across Bengaluru since {CONTACT_INFO.since}.
+          <p className="text-xs text-zinc-300 leading-relaxed font-normal">
+            &ldquo;{CONTACT_INFO.tagline}&rdquo; Facilitating people to buy, sell, and invest in premium properties across Bengaluru since {CONTACT_INFO.since}.
           </p>
 
-          <div className="pt-2 text-xs text-zinc-400 space-y-1">
+          <div className="pt-2 text-[11px] text-zinc-400 space-y-1">
             <p className="font-semibold text-zinc-200">Karnataka RERA Registered Partner</p>
-            <p>100% Verified Titles · Clear Approvals · End-to-End Handholding</p>
+            <p>100% Verified Titles · Clear Approvals</p>
           </div>
         </div>
 
-        {/* Column 2: Quick Links */}
+        {/* Column 2: The 5 Core Services */}
+        <div className="lg:col-span-2 space-y-4">
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-amber-400 border-b border-white/10 pb-2">
+            Our 5 Services
+          </h4>
+          <ul className="space-y-2.5 text-xs">
+            <li>
+              <Link href="/services#buying-selling" className="text-zinc-300 hover:text-amber-400 transition-colors block">
+                Buying / Selling
+              </Link>
+            </li>
+            <li>
+              <Link href="/services#loan-advice" className="text-zinc-300 hover:text-amber-400 transition-colors block">
+                Loan Advice
+              </Link>
+            </li>
+            <li>
+              <Link href="/services#interior-service" className="text-zinc-300 hover:text-amber-400 transition-colors block">
+                Interior Service
+              </Link>
+            </li>
+            <li>
+              <Link href="/services#documentation-service" className="text-zinc-300 hover:text-amber-400 transition-colors block">
+                Documentation Service
+              </Link>
+            </li>
+            <li>
+              <Link href="/services#new-launches" className="text-zinc-300 hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                <span>New Launches</span>
+                <span className="text-[9px] px-1 py-0.2 uppercase font-bold bg-amber-500 text-zinc-950 rounded">VIP</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 3: Quick Links */}
         <div className="lg:col-span-2 space-y-4">
           <h4 className="text-xs font-semibold uppercase tracking-wider text-white border-b border-white/10 pb-2">
             Explore
           </h4>
-          <ul className="space-y-2.5 text-sm">
+          <ul className="space-y-2.5 text-xs">
             <li>
               <Link href="/" className="text-zinc-300 hover:text-amber-400 transition-colors">
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/services" className="text-zinc-300 hover:text-amber-400 transition-colors">
-                Services &amp; Offerings
-              </Link>
-            </li>
-            <li>
               <Link href="/properties" className="text-zinc-300 hover:text-amber-400 transition-colors">
-                Featured Properties
+                All Properties
               </Link>
             </li>
             <li>
@@ -101,28 +131,28 @@ export const Footer: React.FC = () => {
             </li>
             <li>
               <Link href="/faq" className="text-zinc-300 hover:text-amber-400 transition-colors">
-                Frequently Asked Questions
+                FAQ
               </Link>
             </li>
             <li>
               <Link href="/blog" className="text-zinc-300 hover:text-amber-400 transition-colors">
-                Articles &amp; Market Insights
+                Market Insights
               </Link>
             </li>
             <li>
               <Link href="/contact-us" className="text-zinc-300 hover:text-amber-400 transition-colors">
-                Contact &amp; Location
+                Contact Desk
               </Link>
             </li>
           </ul>
         </div>
 
-        {/* Column 3: Featured Developments */}
+        {/* Column 4: Featured Developments */}
         <div className="lg:col-span-3 space-y-4">
           <h4 className="text-xs font-semibold uppercase tracking-wider text-white border-b border-white/10 pb-2">
             Signature Developments
           </h4>
-          <ul className="space-y-3 text-sm">
+          <ul className="space-y-3 text-xs">
             {PROPERTIES.map((prop) => (
               <li key={prop.id}>
                 <Link
@@ -132,7 +162,7 @@ export const Footer: React.FC = () => {
                   <span className="text-zinc-200 group-hover:text-amber-400 font-medium transition-colors block">
                     {prop.title}
                   </span>
-                  <span className="text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors">
+                  <span className="text-[11px] text-zinc-400 group-hover:text-zinc-300 transition-colors">
                     {prop.location.split(",")[0]} · {prop.price}
                   </span>
                 </Link>

@@ -18,9 +18,45 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+
+  const serviceItems = [
+    {
+      title: "Buying / Selling",
+      href: "/services#buying-selling",
+      subtitle: "End-to-end property advisory & transactions",
+      icon: "solar:buildings-linear",
+    },
+    {
+      title: "Loan Advice",
+      href: "/services#loan-advice",
+      subtitle: "Fast-track financing with premier banks",
+      icon: "solar:chart-square-linear",
+    },
+    {
+      title: "Interior Service",
+      href: "/services#interior-service",
+      subtitle: "Turnkey bespoke fitout & custom design",
+      icon: "solar:sofa-linear",
+    },
+    {
+      title: "Documentation Service",
+      href: "/services#documentation-service",
+      subtitle: "Encumbrance clearance & legal vetting",
+      icon: "solar:document-text-linear",
+    },
+    {
+      title: "New Launches (Launching Soon)",
+      href: "/services#new-launches",
+      subtitle: "Exclusive early-bird access & VIP pricing",
+      icon: "solar:rocket-linear",
+      badge: "VIP",
+    },
+  ];
+
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
+    { label: "Services", href: "/services", hasDropdown: true },
     { label: "Properties", href: "/properties" },
     { label: "About Us", href: "/about-us" },
     { label: "FAQ", href: "/faq" },
@@ -65,32 +101,75 @@ export const Navigation: React.FC = () => {
           <nav className="hidden lg:flex items-center space-x-8 xl:space-x-10 text-xs font-sans font-medium tracking-[0.15em] uppercase text-zinc-300">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
-              const hasDropdown = link.label === "Services";
+              const hasDropdown = link.hasDropdown;
               
               return (
                 <div key={link.href} className="relative group">
                   <Link
                     href={link.href}
-                    className={`transition-colors duration-300 py-4 flex items-center gap-1 ${
+                    className={`transition-colors duration-300 py-4 flex items-center gap-1.5 ${
                       isActive
                         ? "text-amber-400 font-semibold"
                         : "hover:text-white"
                     }`}
                   >
-                    {link.label}
-                    {hasDropdown && <Icon icon="solar:alt-arrow-down-linear" width={14} height={14} className="group-hover:rotate-180 transition-transform duration-300" />}
+                    <span>{link.label}</span>
+                    {hasDropdown && (
+                      <Icon
+                        icon="solar:alt-arrow-down-linear"
+                        width={13}
+                        height={13}
+                        className="group-hover:rotate-180 transition-transform duration-300 text-amber-400"
+                      />
+                    )}
                     {isActive && (
                       <span className="absolute bottom-2 left-0 w-full h-[2px] bg-amber-400 rounded-full" />
                     )}
                   </Link>
 
-                  {/* Dropdown Menu */}
+                  {/* Actual 5 Services Dropdown Menu */}
                   {hasDropdown && (
-                    <div className="absolute top-[100%] left-0 w-56 bg-zinc-950/95 backdrop-blur-xl border border-white/10 rounded-md shadow-2xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 flex flex-col py-2 z-50">
-                      <Link href="/services#sales" className="px-5 py-3 hover:bg-white/5 hover:text-amber-400 transition-colors text-[10px] tracking-widest text-zinc-300 border-b border-white/5">Property Sales</Link>
-                      <Link href="/services#management" className="px-5 py-3 hover:bg-white/5 hover:text-amber-400 transition-colors text-[10px] tracking-widest text-zinc-300 border-b border-white/5">Property Management</Link>
-                      <Link href="/services#consulting" className="px-5 py-3 hover:bg-white/5 hover:text-amber-400 transition-colors text-[10px] tracking-widest text-zinc-300 border-b border-white/5">Investment Consulting</Link>
-                      <Link href="/services#valuation" className="px-5 py-3 hover:bg-white/5 hover:text-amber-400 transition-colors text-[10px] tracking-widest text-zinc-300">Valuation & Advisory</Link>
+                    <div className="absolute top-[100%] left-0 w-80 bg-zinc-950/98 backdrop-blur-2xl border border-white/15 rounded-xl shadow-2xl opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 flex flex-col p-2 z-50 divide-y divide-white/5">
+                      <div className="px-3 py-2 text-[10px] uppercase font-sans tracking-[0.2em] text-amber-400 font-semibold">
+                        Our 5 Core Services
+                      </div>
+                      <div className="py-1 space-y-1">
+                        {serviceItems.map((srv) => (
+                          <Link
+                            key={srv.href}
+                            href={srv.href}
+                            className="group/item flex items-start gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-all text-left"
+                          >
+                            <div className="p-2 rounded bg-amber-400/10 text-amber-400 group-hover/item:bg-amber-400 group-hover/item:text-zinc-950 transition-colors shrink-0 mt-0.5">
+                              <Icon icon={srv.icon} width={16} height={16} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-serif normal-case tracking-normal text-white group-hover/item:text-amber-300 transition-colors font-medium">
+                                  {srv.title}
+                                </span>
+                                {srv.badge && (
+                                  <span className="text-[9px] px-1.5 py-0.2 uppercase font-sans font-bold bg-amber-500 text-zinc-950 rounded">
+                                    {srv.badge}
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-[10px] normal-case tracking-normal text-zinc-400 font-sans font-light line-clamp-1 mt-0.5">
+                                {srv.subtitle}
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                      <div className="pt-2 pb-1 px-3">
+                        <Link
+                          href="/services"
+                          className="flex items-center justify-between text-[10px] font-sans uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors"
+                        >
+                          <span>Explore All Services</span>
+                          <Icon icon="solar:arrow-right-linear" width={14} height={14} />
+                        </Link>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -128,7 +207,7 @@ export const Navigation: React.FC = () => {
 
       {/* Drawer Menu (Mobile / Tablet) */}
       <div
-        className={`fixed inset-0 z-[60] bg-zinc-950/98 backdrop-blur-2xl transition-all duration-400 flex flex-col justify-between p-6 sm:p-10 lg:hidden ${
+        className={`fixed inset-0 z-[60] bg-zinc-950/98 backdrop-blur-2xl transition-all duration-400 flex flex-col justify-between p-6 sm:p-10 lg:hidden overflow-y-auto ${
           menuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-4"
@@ -160,21 +239,69 @@ export const Navigation: React.FC = () => {
           </button>
         </div>
 
-        <nav className="flex flex-col space-y-5 my-auto py-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className={`text-2xl sm:text-3xl font-serif tracking-tight transition-colors ${
-                pathname === link.href
-                  ? "text-amber-400 font-normal"
-                  : "text-zinc-300 hover:text-white"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="flex flex-col space-y-4 my-auto py-6">
+          {navLinks.map((link) => {
+            if (link.label === "Services") {
+              return (
+                <div key={link.href} className="flex flex-col">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={`text-2xl sm:text-3xl font-serif tracking-tight transition-colors ${
+                        pathname === link.href
+                          ? "text-amber-400 font-normal"
+                          : "text-zinc-300 hover:text-white"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                    <button
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      className="p-2 text-amber-400"
+                      aria-label="Toggle services list"
+                    >
+                      <Icon
+                        icon={mobileServicesOpen ? "solar:alt-arrow-up-linear" : "solar:alt-arrow-down-linear"}
+                        width={20}
+                        height={20}
+                      />
+                    </button>
+                  </div>
+                  {mobileServicesOpen && (
+                    <div className="pl-4 mt-2 py-2 space-y-3 border-l-2 border-amber-400/30">
+                      {serviceItems.map((srv) => (
+                        <Link
+                          key={srv.href}
+                          href={srv.href}
+                          onClick={() => setMenuOpen(false)}
+                          className="flex items-center gap-2.5 text-sm font-sans text-zinc-300 hover:text-amber-400 transition-colors"
+                        >
+                          <Icon icon={srv.icon} width={16} height={16} className="text-amber-400 shrink-0" />
+                          <span>{srv.title}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className={`text-2xl sm:text-3xl font-serif tracking-tight transition-colors ${
+                  pathname === link.href
+                    ? "text-amber-400 font-normal"
+                    : "text-zinc-300 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="border-t border-white/10 pt-6 space-y-3 font-sans text-xs text-zinc-400">

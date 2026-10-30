@@ -18,7 +18,12 @@ export function PropertiesClient({ properties }: { properties: any[] }) {
     location: "",
     fullAddress: "",
     bedrooms: "",
+    bathrooms: "",
     area: "",
+    developmentSize: "",
+    totalUnits: "",
+    completionDate: "",
+    reraNo: "",
     heroImage: "/images/sbr-one-hero.jpg",
     gallery: "",
     description: "",
@@ -37,8 +42,14 @@ export function PropertiesClient({ properties }: { properties: any[] }) {
 
   const openEditModal = (prop: any) => {
     setEditingId(prop.id);
+    const keyParams = (typeof prop.keyParameters === 'object' && prop.keyParameters) ? prop.keyParameters : {};
     setFormData({
       ...prop,
+      bathrooms: prop.bathrooms || keyParams.bathrooms || "",
+      developmentSize: prop.developmentSize || keyParams.developmentSize || "",
+      totalUnits: prop.totalUnits || keyParams.totalUnits || "",
+      completionDate: prop.completionDate || keyParams.completionDate || "",
+      reraNo: prop.reraNo || keyParams.reraNo || "",
       gallery: Array.isArray(prop.gallery) ? prop.gallery.join(", ") : (prop.gallery || ""),
       description: prop.description || "",
       projectOverview: prop.projectOverview || "",
@@ -207,12 +218,32 @@ export function PropertiesClient({ properties }: { properties: any[] }) {
                       }} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. ₹ 1.2 Cr Onwards" />
                     </div>
                     <div>
-                      <label className="text-xs text-zinc-400 block mb-1">Bedrooms</label>
+                      <label className="text-xs text-zinc-400 block mb-1">Bedrooms / Config</label>
                       <input type="text" value={formData.bedrooms} onChange={e => setFormData({...formData, bedrooms: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. 2, 3 & 4 BHK" />
+                    </div>
+                    <div>
+                      <label className="text-xs text-zinc-400 block mb-1">Bathrooms</label>
+                      <input type="text" value={formData.bathrooms} onChange={e => setFormData({...formData, bathrooms: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. 2 - 3 Baths" />
                     </div>
                     <div>
                       <label className="text-xs text-zinc-400 block mb-1">Area (Sq.Ft)</label>
                       <input type="text" value={formData.area} onChange={e => setFormData({...formData, area: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. 1500 - 2500 Sq.Ft" />
+                    </div>
+                    <div>
+                      <label className="text-xs text-zinc-400 block mb-1">Development Size</label>
+                      <input type="text" value={formData.developmentSize} onChange={e => setFormData({...formData, developmentSize: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. 11.75 Acres" />
+                    </div>
+                    <div>
+                      <label className="text-xs text-zinc-400 block mb-1">Total Units</label>
+                      <input type="text" value={formData.totalUnits} onChange={e => setFormData({...formData, totalUnits: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. 930 Units" />
+                    </div>
+                    <div>
+                      <label className="text-xs text-zinc-400 block mb-1">Possession / Completion</label>
+                      <input type="text" value={formData.completionDate} onChange={e => setFormData({...formData, completionDate: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. 2028 or Ready to Move" />
+                    </div>
+                    <div>
+                      <label className="text-xs text-zinc-400 block mb-1">RERA Number</label>
+                      <input type="text" value={formData.reraNo} onChange={e => setFormData({...formData, reraNo: e.target.value})} className="w-full bg-zinc-950 border border-white/10 px-4 py-2 text-sm text-white rounded-lg focus:outline-none focus:border-amber-400" placeholder="e.g. PRM/KA/RERA/1251/..." />
                     </div>
                   </div>
                 </div>

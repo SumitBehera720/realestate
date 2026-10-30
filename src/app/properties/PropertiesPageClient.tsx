@@ -126,8 +126,15 @@ function PropertiesContent({ properties }: { properties: any[] }) {
                     alt={prop.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute top-4 left-4 bg-black/75 backdrop-blur-sm px-3 py-1 text-xs font-sans uppercase font-medium text-white rounded border border-white/10">
-                    {prop.propertyType}
+                  <div className="absolute top-4 left-4 flex flex-col gap-1.5">
+                    <span className="bg-black/75 backdrop-blur-sm px-3 py-1 text-xs font-sans uppercase font-medium text-white rounded border border-white/10">
+                      {prop.propertyType}
+                    </span>
+                    {prop.status && (
+                      <span className="bg-amber-500/20 text-amber-300 border border-amber-500/30 backdrop-blur-sm px-2.5 py-0.5 text-[10px] font-sans uppercase font-semibold rounded w-fit">
+                        {prop.status}
+                      </span>
+                    )}
                   </div>
                   <div className="absolute top-4 right-4 bg-amber-500 text-zinc-950 px-3 py-1 text-xs font-sans font-bold rounded shadow-md">
                     {prop.price}
@@ -137,16 +144,22 @@ function PropertiesContent({ properties }: { properties: any[] }) {
                       {prop.badge}
                     </div>
                   )}
+                  {prop.gallery && prop.gallery.length > 0 && (
+                    <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md px-2.5 py-1 text-[11px] font-sans text-zinc-200 rounded flex items-center gap-1.5 border border-white/15">
+                      <Icon icon="solar:gallery-linear" width={14} height={14} className="text-amber-400" />
+                      <span>{prop.gallery.length} Photos</span>
+                    </div>
+                  )}
                 </div>
 
-                <div className="p-8 flex flex-col justify-between flex-1 space-y-6">
+                <div className="p-7 sm:p-8 flex flex-col justify-between flex-1 space-y-5">
                   <div>
                     <div className="flex items-center gap-1.5 text-xs font-sans text-amber-400 mb-2">
                       <Icon icon="solar:map-point-linear" width={16} height={16} />
-                      <span>{prop.location}</span>
+                      <span className="truncate">{prop.location}</span>
                     </div>
 
-                    <h2 className="text-2xl font-serif text-white group-hover:text-amber-300 transition-colors mb-3">
+                    <h2 className="text-2xl font-serif text-white group-hover:text-amber-300 transition-colors mb-2.5">
                       {prop.title}
                     </h2>
 
@@ -155,18 +168,38 @@ function PropertiesContent({ properties }: { properties: any[] }) {
                     </p>
                   </div>
 
+                  {/* Complete Key Parameters Matrix */}
                   <div className="grid grid-cols-2 gap-3 py-3 border-y border-white/10 text-xs font-sans text-zinc-300">
                     <div>
-                      <span className="text-zinc-500 block">Bedrooms:</span>
+                      <span className="text-zinc-500 block text-[11px]">Bedrooms:</span>
                       <span className="font-medium text-white">{prop.bedrooms}</span>
                     </div>
                     <div>
-                      <span className="text-zinc-500 block">Area:</span>
+                      <span className="text-zinc-500 block text-[11px]">Area:</span>
                       <span className="font-medium text-white">{prop.area}</span>
                     </div>
+                    {prop.bathrooms && (
+                      <div>
+                        <span className="text-zinc-500 block text-[11px]">Baths:</span>
+                        <span className="font-medium text-white">{prop.bathrooms}</span>
+                      </div>
+                    )}
+                    {(prop.developmentSize || prop.completionDate) && (
+                      <div>
+                        <span className="text-zinc-500 block text-[11px]">{prop.completionDate ? "Possession:" : "Size:"}</span>
+                        <span className="font-medium text-white">{prop.completionDate || prop.developmentSize}</span>
+                      </div>
+                    )}
                   </div>
 
-                  <div className="flex items-center justify-between text-xs font-sans uppercase tracking-wider text-amber-400 group-hover:text-amber-300 font-semibold">
+                  {prop.reraNo && (
+                    <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-sans">
+                      <Icon icon="solar:shield-check-linear" width={15} height={15} className="shrink-0" />
+                      <span className="truncate">RERA: {prop.reraNo}</span>
+                    </div>
+                  )}
+
+                  <div className="pt-2 flex items-center justify-between text-xs font-sans uppercase tracking-wider text-amber-400 group-hover:text-amber-300 font-semibold">
                     <span>View Full Details &amp; Gallery</span>
                     <Icon
                       icon="solar:arrow-right-linear"

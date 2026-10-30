@@ -23,8 +23,8 @@ export const HeritageVillaSection: React.FC<{ properties: any[] }> = ({ properti
       <div className="relative h-[110vh] min-h-[750px] w-full flex items-center justify-center overflow-hidden curtain-wrapper">
         <div className="curtain-reveal" />
         <img
-          src="/images/sbr-one-main.webp"
-          alt="SBR One Residence Flagship"
+          src="/images/sbr/sbr-one-residence/hero.jpg"
+          alt="SBR One Residence Flagship Architecture"
           className="absolute inset-0 w-full h-full object-cover opacity-70 scale-out js-parallax"
           data-speed="0.2"
         />
@@ -62,87 +62,168 @@ export const HeritageVillaSection: React.FC<{ properties: any[] }> = ({ properti
         </div>
       </div>
 
-      {/* 2. Project Intro & Specs Grid */}
+      {/* 2. Project Intro & Specs Grid - Official SBR One Residence Content */}
       <div className="max-w-[1920px] mx-auto px-6 lg:px-16 py-24 sm:py-36 lg:py-48 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-        {/* Left Column (Sticky Vision) */}
+        {/* Left Column (Official Overview & Highlights) */}
         <div className="lg:col-span-5 relative">
           <div className="lg:sticky lg:top-36">
             <span className="text-xs font-sans tracking-[0.3em] uppercase text-amber-400 font-semibold mb-6 sm:mb-8 block fade-up">
-              Master-Planned Living
+              SBR One Residence · Project Overview
             </span>
-            <h3 className="text-3xl sm:text-5xl lg:text-5xl font-serif tracking-tight font-light text-white mb-8 split-text leading-[1.12]">
-              11.75 Acres of sheer luxury in the heart of Whitefield IT corridor.
+            <h3 className="text-3xl sm:text-5xl lg:text-5xl font-serif tracking-tight font-light text-white mb-6 split-text leading-[1.15]">
+              2.5 &amp; 3 BHK Flats in Hope Farm, Whitefield
             </h3>
-            <p className="text-zinc-300 text-base lg:text-lg font-sans font-light leading-relaxed mb-10 fade-up delay-100">
-              SBR One Residence combines 930 premium residences across 12+ architectural towers. Just 3 minutes from Hope Farm Metro Station, enjoy unparalleled connectivity to ITPL, world-class international schools, and over 45+ resort-caliber amenities.
+            <p className="text-zinc-300 text-base lg:text-lg font-sans font-light leading-relaxed mb-6 fade-up delay-100">
+              SBR One Residence, a signature project by SBR Group, is a prestigious apartment complex situated near Hope Farm Junction in Whitefield, the vibrant heart of IT Bangalore. Combining modern architecture with thoughtful design, this residential community exemplifies luxury and comfort.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <p className="text-zinc-400 text-sm lg:text-base font-sans font-light leading-relaxed mb-8 fade-up delay-150">
+              Its strategic location offers seamless connectivity to major tech parks, educational institutions, healthcare facilities, and entertainment hubs, making it an ideal choice for professionals and families alike. SBR One Residence stands as a testament to the group&apos;s commitment to quality, blending contemporary living with unparalleled convenience in one of Bangalore’s most sought-after neighborhoods.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
               <Link
                 href="/properties/sbr-one-residence"
                 className="inline-flex text-xs font-sans tracking-[0.2em] uppercase pb-2 border-b border-amber-400 hover:text-amber-300 text-white transition-all fade-up delay-200"
               >
                 View Full Specifications &amp; Gallery &rarr;
               </Link>
+              <button
+                onClick={(e) => openInquiry("SBR One Residence", e)}
+                className="text-xs font-sans uppercase tracking-[0.18em] text-zinc-400 hover:text-white transition-colors"
+              >
+                Enquire Now
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Right Column (Specifications & Visual) */}
+        {/* Right Column (Official Specifications & Amenities Grid) */}
         <div className="lg:col-span-7">
-          {/* Stats Grid: 2x2 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10 border border-white/10 mb-16 fade-up">
-            <div className="bg-zinc-950 p-8 sm:p-12 hover:bg-zinc-900/60 transition-colors">
-              <span className="block text-4xl lg:text-5xl font-serif mb-3 font-light text-amber-400">
+          {/* Stats Grid: 3x2 on tablet/desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-px bg-white/10 border border-white/10 mb-8 fade-up">
+            <div className="bg-zinc-950 p-6 sm:p-8 hover:bg-zinc-900/60 transition-colors">
+              <span className="block text-3xl sm:text-4xl font-serif mb-2 font-light text-amber-400">
                 ₹1.69 Cr*
               </span>
-              <span className="text-xs font-sans uppercase tracking-[0.2em] text-zinc-400">
+              <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-zinc-400">
                 Starting Launch Price
               </span>
             </div>
 
-            <div className="bg-zinc-950 p-8 sm:p-12 hover:bg-zinc-900/60 transition-colors">
-              <span className="block text-4xl lg:text-5xl font-serif mb-3 font-light text-white">
+            <div className="bg-zinc-950 p-6 sm:p-8 hover:bg-zinc-900/60 transition-colors">
+              <span className="block text-3xl sm:text-4xl font-serif mb-2 font-light text-white">
                 11.75 Acres
               </span>
-              <span className="text-xs font-sans uppercase tracking-[0.2em] text-zinc-400">
-                Township Area (12+ Blocks)
+              <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-zinc-400">
+                Development Size
               </span>
             </div>
 
-            <div className="bg-zinc-950 p-8 sm:p-12 hover:bg-zinc-900/60 transition-colors">
-              <span className="block text-4xl lg:text-5xl font-serif mb-3 font-light text-white">
+            <div className="bg-zinc-950 p-6 sm:p-8 hover:bg-zinc-900/60 transition-colors">
+              <span className="block text-3xl sm:text-4xl font-serif mb-2 font-light text-white">
                 2.5 &amp; 3 BHK
               </span>
-              <span className="text-xs font-sans uppercase tracking-[0.2em] text-zinc-400">
-                1,472 - 2,150 Sq.Ft
+              <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-zinc-400">
+                Bedrooms (1,192 - 2,150 Sq.Ft)
               </span>
             </div>
 
-            <div className="bg-zinc-950 p-8 sm:p-12 hover:bg-zinc-900/60 transition-colors">
-              <span className="block text-4xl lg:text-5xl font-serif mb-3 font-light text-white">
+            <div className="bg-zinc-950 p-6 sm:p-8 hover:bg-zinc-900/60 transition-colors">
+              <span className="block text-3xl sm:text-4xl font-serif mb-2 font-light text-white">
                 930 Units
               </span>
-              <span className="text-xs font-sans uppercase tracking-[0.2em] text-zinc-400">
-                RERA: PRM/KA/RERA/1251/446/PR/131224/007297
+              <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-zinc-400">
+                Total Residences
               </span>
+            </div>
+
+            <div className="bg-zinc-950 p-6 sm:p-8 hover:bg-zinc-900/60 transition-colors">
+              <span className="block text-3xl sm:text-4xl font-serif mb-2 font-light text-white">
+                12+ Blocks
+              </span>
+              <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-zinc-400">
+                No. of Blocks (G+20 Floors)
+              </span>
+            </div>
+
+            <div className="bg-zinc-950 p-6 sm:p-8 hover:bg-zinc-900/60 transition-colors">
+              <span className="block text-3xl sm:text-4xl font-serif mb-2 font-light text-white">
+                2030
+              </span>
+              <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-zinc-400">
+                Completion Date
+              </span>
+            </div>
+          </div>
+
+          {/* Location & RERA Banner */}
+          <div className="bg-zinc-900/60 border border-white/10 p-5 rounded-lg mb-8 flex flex-wrap items-center justify-between gap-4 fade-up">
+            <div className="flex items-center gap-3">
+              <Icon icon="solar:shield-check-linear" width={24} height={24} className="text-amber-400 shrink-0" />
+              <div>
+                <span className="text-xs uppercase font-sans font-semibold tracking-wider text-white block">
+                  Karnataka RERA: PRM/KA/RERA/1251/446/PR/131224/007297
+                </span>
+                <span className="text-xs text-zinc-400 font-sans">
+                  Project Type: Apartment · Location: Near Hope Farm Junction, Whitefield
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Official Amenities */}
+          <div className="mb-12 fade-up">
+            <span className="text-xs font-sans uppercase tracking-[0.2em] text-zinc-400 font-semibold mb-4 block">
+              Official Project Amenities
+            </span>
+            <div className="flex flex-wrap gap-2.5">
+              {[
+                "Indoor GYM",
+                "Pool Deck",
+                "Amphitheatre",
+                "Cricket Practice Net",
+                "Skating Rink",
+                "Multipurpose Deck",
+                "Seating Court",
+                "Kid's Play Area",
+                "Party Lawn",
+                "Multi-Court",
+                "Jogging Track",
+                "Yoga Deck",
+                "Badminton Court",
+                "Multiple Gardens",
+              ].map((amenity) => (
+                <span
+                  key={amenity}
+                  className="px-3 py-1.5 bg-zinc-900/90 border border-white/10 text-xs text-zinc-300 font-sans rounded-full flex items-center gap-1.5 hover:border-amber-400/50 hover:text-white transition-colors"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  {amenity}
+                </span>
+              ))}
             </div>
           </div>
 
           {/* Editorial Image with Curtain Reveal */}
           <Link
             href="/properties/sbr-one-residence"
-            className="group block relative w-full aspect-[4/3] sm:aspect-[16/10] curtain-wrapper mt-12 rounded overflow-hidden"
+            className="group block relative w-full aspect-[4/3] sm:aspect-[16/10] curtain-wrapper rounded-lg overflow-hidden border border-white/10 shadow-2xl"
           >
             <div className="curtain-reveal" />
             <img
-              src="/images/sbr-one-gallery-1.webp"
+              src="/images/sbr/sbr-one-residence/gallery-1.jpg"
               alt="SBR One Residence Flagship Architecture"
               className="w-full h-full object-cover scale-out group-hover:scale-105 transition-transform duration-700 js-parallax"
               data-speed="0.08"
             />
-            <div className="absolute bottom-6 left-6 bg-black/80 backdrop-blur-md px-5 py-3 border border-white/10 rounded">
-              <span className="text-xs font-sans uppercase tracking-widest text-amber-400 font-semibold block">
-                SBR One Residence · View Dedicated Page &rarr;
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+              <div className="bg-black/80 backdrop-blur-md px-5 py-3 border border-white/15 rounded">
+                <span className="text-xs font-sans uppercase tracking-widest text-amber-400 font-semibold block">
+                  SBR One Residence · View Dedicated Page &rarr;
+                </span>
+              </div>
+              <span className="hidden sm:inline-block text-[11px] font-sans uppercase tracking-wider text-zinc-300 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded border border-white/10">
+                Explore All Details
               </span>
             </div>
           </Link>
@@ -169,9 +250,9 @@ export const HeritageVillaSection: React.FC<{ properties: any[] }> = ({ properti
           </Link>
         </div>
 
-        {/* 4 Flagship Property Cards */}
+        {/* Curated Properties Grid */}
         <div className="max-w-[1920px] mx-auto px-6 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {properties.slice(0, 4).map((item) => (
+          {properties.map((item) => (
             <Link
               key={item.id}
               href={`/properties/${item.slug}`}
@@ -184,27 +265,42 @@ export const HeritageVillaSection: React.FC<{ properties: any[] }> = ({ properti
                   alt={item.title}
                   className="w-full h-full object-cover scale-out group-hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute top-4 left-4 flex flex-col gap-1">
+                  <span className="bg-black/80 backdrop-blur-sm px-2.5 py-1 text-[10px] uppercase font-sans font-semibold tracking-wider text-zinc-200 border border-white/10 rounded">
+                    {item.propertyType}
+                  </span>
+                </div>
                 <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-sm px-3 py-1.5 text-xs uppercase font-sans font-semibold tracking-wider text-amber-400 border border-white/10 rounded">
                   {item.price}
                 </div>
                 {item.badge && (
-                  <div className="absolute bottom-4 left-4 bg-red-500/90 backdrop-blur-sm px-3 py-1 text-xs font-sans uppercase font-bold text-white rounded shadow-md border border-white/20">
+                  <div className="absolute bottom-4 left-4 bg-red-500/90 backdrop-blur-sm px-2.5 py-1 text-[10px] font-sans uppercase font-bold text-white rounded shadow-md border border-white/20">
                     {item.badge}
+                  </div>
+                )}
+                {item.gallery && item.gallery.length > 0 && (
+                  <div className="absolute bottom-4 right-4 bg-black/75 backdrop-blur-sm px-2 py-0.5 text-[10px] font-sans text-zinc-300 rounded border border-white/15">
+                    {item.gallery.length} Photos
                   </div>
                 )}
               </div>
 
               <div className="p-6 flex flex-col justify-between flex-1">
                 <div>
-                  <span className="text-xs font-sans uppercase tracking-[0.15em] text-zinc-400 block mb-2">
+                  <span className="text-xs font-sans uppercase tracking-[0.15em] text-zinc-400 block mb-2 truncate">
                     {item.location}
                   </span>
-                  <h4 className="text-xl font-serif font-normal text-white group-hover:text-amber-300 transition-colors mb-2">
+                  <h4 className="text-xl font-serif font-normal text-white group-hover:text-amber-300 transition-colors mb-2 line-clamp-1">
                     {item.title}
                   </h4>
-                  <p className="text-xs text-zinc-400 font-sans font-light mb-6">
+                  <p className="text-xs text-zinc-400 font-sans font-light mb-4">
                     {item.bedrooms} · {item.area}
                   </p>
+                  {item.reraNo && (
+                    <p className="text-[10px] text-zinc-500 font-sans truncate mb-4">
+                      RERA: {item.reraNo}
+                    </p>
+                  )}
                 </div>
 
                 <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-sans font-medium uppercase tracking-wider text-amber-400 group-hover:text-amber-300">

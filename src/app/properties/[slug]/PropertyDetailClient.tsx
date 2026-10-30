@@ -204,6 +204,13 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
               <span className="text-lg font-serif text-white font-medium">{property.location?.split(",")[0] || ""}</span>
             </div>
 
+            {property.bathrooms && (
+              <div className="p-5 bg-white/5 border border-white/10 rounded">
+                <span className="text-xs text-zinc-400 font-sans block mb-1">Bathrooms</span>
+                <span className="text-lg font-serif text-white font-medium">{property.bathrooms}</span>
+              </div>
+            )}
+
             {property.developmentSize && (
               <div className="p-5 bg-white/5 border border-white/10 rounded">
                 <span className="text-xs text-zinc-400 font-sans block mb-1">Development Size</span>
@@ -215,6 +222,13 @@ export default function PropertyDetailClient({ property, allProperties }: Props)
               <div className="p-5 bg-white/5 border border-white/10 rounded">
                 <span className="text-xs text-zinc-400 font-sans block mb-1">Total Units</span>
                 <span className="text-lg font-serif text-white font-medium">{property.totalUnits}</span>
+              </div>
+            )}
+
+            {property.noOfBlocks && (
+              <div className="p-5 bg-white/5 border border-white/10 rounded">
+                <span className="text-xs text-zinc-400 font-sans block mb-1">Towers / Blocks</span>
+                <span className="text-lg font-serif text-white font-medium">{property.noOfBlocks}</span>
               </div>
             )}
 

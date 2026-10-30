@@ -108,7 +108,8 @@ export default function ServicesPage() {
           {SERVICES.map((service) => (
             <div
               key={service.id}
-              className="bg-zinc-900/50 border border-white/10 hover:border-amber-400/40 rounded-xl overflow-hidden transition-all duration-500 flex flex-col group shadow-xl"
+              id={service.id}
+              className="scroll-mt-32 bg-zinc-900/50 border border-white/10 hover:border-amber-400/40 rounded-xl overflow-hidden transition-all duration-500 flex flex-col group shadow-xl"
             >
               <div className="relative aspect-[16/9] overflow-hidden">
                 <img
